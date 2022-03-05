@@ -25,7 +25,7 @@ import db from "../DB.config"
     const [newFood, _] = await db.execute(sql)
     return newFood;
   }
-  async find(query: string, value: string) {
+  async find(query?: string, value?: string) {
     //if theres a query find by the query otherwise retrive all from the table
     const sql = `SELECT * From foods ${query && value ? `WHERE ${query} ="${value}"` : ''}`
     console.log(sql)

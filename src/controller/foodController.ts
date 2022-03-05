@@ -1,4 +1,5 @@
 import { NextFunction ,Request,Response } from "express"
+import { validateRequestBody } from "../helpers/validateRequestBody"
 import { foodService } from "../service/foodService"
 import { foodMaker } from "../utils/data"
 import BaseController from "./controller.config"
@@ -28,14 +29,7 @@ import BaseController from "./controller.config"
   }
   private async createFood(req: Request, res: Response, next: NextFunction):Promise<void> {
     try {
-      // const validData = {
-      //   name: req.body.name,
-      //   price: req.body.price,
-      //   size: req.body.size,
-      //   calories: req.body.calories
-      // }
-      // console.log(req.body)
-      const foods = foodMaker()
+      const foods = validateRequestBody(req.body,["name","price","size","calories","image"])
       const food = await foodService.createFood(foods)
      res.status(201).json({
        status: 'success',

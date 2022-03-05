@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodController = void 0;
+const validateRequestBody_1 = require("../helpers/validateRequestBody");
 const foodService_1 = require("../service/foodService");
-const data_1 = require("../utils/data");
 const controller_config_1 = __importDefault(require("./controller.config"));
 class FoodController extends controller_config_1.default {
     constructor() {
@@ -45,14 +45,7 @@ class FoodController extends controller_config_1.default {
     createFood(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                // const validData = {
-                //   name: req.body.name,
-                //   price: req.body.price,
-                //   size: req.body.size,
-                //   calories: req.body.calories
-                // }
-                // console.log(req.body)
-                const foods = (0, data_1.foodMaker)();
+                const foods = (0, validateRequestBody_1.validateRequestBody)(req.body, ["name", "price", "size", "calories", "image"]);
                 const food = yield foodService_1.foodService.createFood(foods);
                 res.status(201).json({
                     status: 'success',

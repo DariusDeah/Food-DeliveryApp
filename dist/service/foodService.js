@@ -15,7 +15,7 @@ const Errors_1 = require("../utils/Errors");
 class FoodService {
     createFood(foodData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const createdFood = yield new Food_1.Food().create(foodData);
+            const createdFood = yield Food_1.FoodDB.create(foodData);
             return createdFood;
         });
     }
@@ -26,14 +26,14 @@ class FoodService {
                 const food = yield this.getByQuery(query);
                 return food;
             }
-            const food = yield new Food_1.Food().find(``, ``);
+            const food = yield new Food().find(``, ``);
             return food;
         });
     }
     getByQuery(query) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(query);
-            const food = yield new Food_1.Food().find(`${query[0]}`, `${query[1]}`);
+            const food = yield new Food().find(`${query[0]}`, `${query[1]}`);
             if (!food)
                 throw new Errors_1.NotFoundException;
             return food;
@@ -41,9 +41,9 @@ class FoodService {
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = yield new Food_1.Food().findById(id);
-            if (!food)
-                throw new Errors_1.NotFoundException;
+            const food = yield new Food().findById(id);
+            if (!food.length)
+                throw new Errors_1.NotFoundException();
             return food;
         });
     }

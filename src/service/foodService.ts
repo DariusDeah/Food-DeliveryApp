@@ -1,10 +1,10 @@
 import { ParsedQs } from "qs";
-import { Food } from "../model/Food";
+import {  FoodDB } from "../model/Food";
 import { NotFoundException } from "../utils/Errors";
 
 class FoodService{
   async createFood(foodData:{name:string,price:number,size:string,calories:number}) {
-    const createdFood = await new Food().create(foodData)
+    const createdFood = await FoodDB.create(foodData)
     return createdFood
   }
   async getFood(req: ParsedQs) {
@@ -24,7 +24,7 @@ class FoodService{
   }
   async getById(id: string) {
     const food = await new Food().findById(id)
-    if (!food) throw new NotFoundException
+    if (!food.length) throw new NotFoundException()
     return food
   }
 }

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Food = void 0;
+exports.FoodDB = void 0;
 const DB_config_1 = __importDefault(require("../DB.config"));
 // interface IFood{
 //   name: string
@@ -55,8 +55,8 @@ class Food {
         return __awaiter(this, void 0, void 0, function* () {
             const sql = `SELECT * FROM foods WHERE id = ${id}`;
             const food = yield DB_config_1.default.query(sql);
-            return food;
+            return food[0];
         });
     }
 }
-exports.Food = Food;
+exports.FoodDB = new Food();

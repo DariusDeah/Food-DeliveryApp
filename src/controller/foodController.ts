@@ -4,10 +4,11 @@ import { foodMaker } from "../utils/data"
 import BaseController from "./controller.config"
  class FoodController extends BaseController {
   constructor() {
-    super('/api/foods')
+    super('/api/v1/foods') //baseroute
     this.router.route(this.baseRoute)
       .get(this.getFoods)
       .post(this.createFood)
+    
     this.router.route(this.baseRoute + '/:id')
       .get(this.getById)
     this.router.route(this.baseRoute + '/stats')
@@ -49,7 +50,7 @@ import BaseController from "./controller.config"
         const food = await foodService.getById(req.params.id)
         res.status(200).json({
           status: 'success',
-          food
+          data:food
         })
       } catch (error) {
         next(error)

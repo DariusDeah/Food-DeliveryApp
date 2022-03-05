@@ -1,20 +1,15 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const app_1 = __importDefault(require("./app"));
-class Server extends app_1.default {
+const app_1 = require("./app");
+class Server {
     constructor() {
-        super();
         this.StartServer();
     }
     StartServer() {
         const PORT = parseInt(process.env.PORT) || 3000;
-        this.app.listen(PORT, () => {
+        app_1.app.app.listen(PORT, () => {
             console.log(`SERVER running on http://localhost:${PORT} `);
         });
     }
 }
-new app_1.default();
-new Server();
+const server = new Server();

@@ -1,7 +1,7 @@
 import express from 'express';
 import { foodController } from './controller/foodController';
-export default class App{
-  protected app: express.Application;
+ class App{
+   app: express.Application;
   constructor() {
     this.app = express();
     this.useMiddleware()
@@ -15,3 +15,4 @@ export default class App{
     this.app.use('/',foodController.router)
   }
 }
+export const app = new App()

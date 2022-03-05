@@ -1,17 +1,16 @@
-import App from './app'
+import  { app } from './app'
 
-class Server extends App{
+class Server{
   constructor() {
-    super();
     this.StartServer()
   }
   StartServer():void {
     const PORT = parseInt(process.env.PORT as string) || 3000
-    this.app.listen(PORT, () => {
+    app.app.listen(PORT, () => {
       console.log(`SERVER running on http://localhost:${PORT} `)
     })
   }
   
 }
-new App()
-new Server()
+
+const server = new Server()

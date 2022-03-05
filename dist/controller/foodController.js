@@ -18,7 +18,7 @@ const data_1 = require("../utils/data");
 const controller_config_1 = __importDefault(require("./controller.config"));
 class FoodController extends controller_config_1.default {
     constructor() {
-        super('/api/foods');
+        super('/api/v1/foods'); //baseroute
         this.router.route(this.baseRoute)
             .get(this.getFoods)
             .post(this.createFood);
@@ -70,7 +70,7 @@ class FoodController extends controller_config_1.default {
                 const food = yield foodService_1.foodService.getById(req.params.id);
                 res.status(200).json({
                     status: 'success',
-                    food
+                    data: food
                 });
             }
             catch (error) {

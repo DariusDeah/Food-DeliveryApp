@@ -7,7 +7,7 @@ import db from "../DB.config"
 //   calories: number
 //   isActive: boolean 
 // }
-export  class Food {
+ class Food {
   async create(data: { name: string, price: number, size: string, calories: number }) {
     let sql = `INSERT INTO foods (
       name,
@@ -36,7 +36,8 @@ export  class Food {
   async findById(id:string) {
     const sql = `SELECT * FROM foods WHERE id = ${id}`
     const food = await db.query(sql)
-    return food
+    return food[0]
   }
   
 }
+export const FoodDB = new Food()

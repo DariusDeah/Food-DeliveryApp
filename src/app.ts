@@ -1,5 +1,6 @@
 import express from 'express';
-import { foodController } from './controller/foodController';
+import helmet from 'helmet';
+import { foodController } from './controller/food.controller';
  class App{
    app: express.Application;
   constructor() {
@@ -7,7 +8,8 @@ import { foodController } from './controller/foodController';
     this.useMiddleware()
     this.useRoutes()
   }
-  private useMiddleware() {
+   private useMiddleware() {
+    this.app.use(helmet())
    this.app.use( express.json({limit:'10mb'}))
     
   }

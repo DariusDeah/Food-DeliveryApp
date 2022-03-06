@@ -12,7 +12,6 @@ class FoodService{
   }
   async getFood(query:ParsedQs) {
     const food = await FoodDB.find(query)
-    console.log(food)
     if (!food.length) throw new NotFoundException();
      return food
   }

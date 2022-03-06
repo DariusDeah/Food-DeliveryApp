@@ -26,7 +26,6 @@ class FoodService {
     getFood(query) {
         return __awaiter(this, void 0, void 0, function* () {
             const food = yield Food_1.FoodDB.find(query);
-            console.log(food);
             if (!food.length)
                 throw new Errors_1.NotFoundException();
             return food;

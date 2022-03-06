@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import { app } from '../app';
-import { foodController } from '../controller/foodController';
+import { foodController } from '../controller/food.controller';
 class FoodsTest {
   private ApiServer: Express.Application;
   //taking the base route for the api endpoint from the controller to make testing more dynamic

@@ -23,6 +23,7 @@ class FoodsTest {
         this.RouteIdTest();
         this.validRoute();
         this.validRoute();
+        this.postRequest();
     }
     RouteIdTest() {
         describe('GET /foods/:id', () => {
@@ -51,8 +52,15 @@ class FoodsTest {
     }
     postRequest() {
         describe('if post request is successful', () => {
+            const reqBody = {
+                name: "endpointTest",
+                price: "1234",
+                size: "small",
+                calories: 44,
+                image: null,
+            };
             it('should return 201', () => __awaiter(this, void 0, void 0, function* () {
-                yield (0, supertest_1.default)(this.ApiServer).post(this.baseRoute);
+                yield (0, supertest_1.default)(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201);
             }));
         });
     }

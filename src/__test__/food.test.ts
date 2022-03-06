@@ -10,6 +10,7 @@ class FoodsTest {
     this.RouteIdTest();
     this.validRoute();
     this.validRoute();
+    this.postRequest();
   }
   private RouteIdTest():void {
     describe('GET /foods/:id', () => {
@@ -40,8 +41,15 @@ class FoodsTest {
 
   private postRequest() {
     describe('if post request is successful', () => {
+      const reqBody = {
+            name: "endpointTest",
+            price: "1234",
+            size: "small",
+            calories: 44,
+            image: null,
+            }
       it('should return 201', async () => {
-        await supertest(this.ApiServer).post(this.baseRoute)
+        await supertest(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201)
       })
     })
   }

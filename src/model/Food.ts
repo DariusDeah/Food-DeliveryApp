@@ -26,7 +26,7 @@ import db from "../DB.config"
        return food
     }
     //if theres a query find by the query otherwise retrieve all from the table
-    const sql = `SELECT * From foods`
+    const sql = `SELECT id,name,price,size,image From foods`
     const food = await db.query(sql)
     return food[0]
    }

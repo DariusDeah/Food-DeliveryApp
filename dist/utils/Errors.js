@@ -9,7 +9,7 @@ class NotFoundException extends Error {
 }
 exports.NotFoundException = NotFoundException;
 class BadRequestException extends Error {
-    constructor(message = "Bad Request") {
+    constructor(message) {
         super(message);
         this.status = 400;
     }

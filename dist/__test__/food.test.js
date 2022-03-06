@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const app_1 = require("../app");
-const food_controller_1 = require("../controller/food.controller");
+const food_controller_1 = require("../controllers/food.controller");
 class FoodsTest {
     constructor() {
         //taking the base route for the api endpoint from the controller to make testing more dynamic

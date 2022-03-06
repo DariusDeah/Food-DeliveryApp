@@ -11,7 +11,7 @@ export class NotFoundException extends Error implements IApiError{
 }
 export class BadRequestException extends Error implements IApiError{
   status: number;
-  constructor(message:string = "Bad Request") {
+  constructor(message:string ) {
     super(message);
     this.status = 400
   }

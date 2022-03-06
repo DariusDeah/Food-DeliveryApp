@@ -5,7 +5,7 @@ class ErrorHandler {
     routerError(app) {
         app.all('*', (req, res) => res.status(404).json({
             status: 'Fail',
-            error: `route not found at ${req.url}`,
+            error: `route not found at ${req.url}`
         }));
     }
     error(app) {

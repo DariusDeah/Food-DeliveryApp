@@ -30,10 +30,10 @@ import BaseController from "./controller.config"
   private async createFood(req: Request, res: Response, next: NextFunction):Promise<void> {
     try {
       const foods = validateRequestBody(req.body,["name","price","size","calories","image"])
-      const food = await foodService.createFood(foods)
+       await foodService.createFood(foods)
      res.status(201).json({
        status: 'success',
-       data: food
+       data: foods
      })
    } catch (error) {
      next(error)

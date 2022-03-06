@@ -46,10 +46,10 @@ class FoodController extends controller_config_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const foods = (0, validateRequestBody_1.validateRequestBody)(req.body, ["name", "price", "size", "calories", "image"]);
-                const food = yield foodService_1.foodService.createFood(foods);
+                yield foodService_1.foodService.createFood(foods);
                 res.status(201).json({
                     status: 'success',
-                    data: food
+                    data: foods
                 });
             }
             catch (error) {

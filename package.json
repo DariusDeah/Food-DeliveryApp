@@ -7,12 +7,14 @@
     "start": "nodemon dist/server.js",
     "test": "jest"
   },
-  "jest":{
-    "preset":"ts-jest",
-    "testEnvironment":"node",
-    "testMatch":["**/**/*.test.js"],
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/**/*.test.js"
+    ],
     "verbose": true,
-    "forceExit":true
+    "forceExit": true
   },
   "keywords": [],
   "author": "",
@@ -21,6 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "express-mongo-sanitize": "^2.2.0",
     "helmet": "^5.0.1",
     "hpp": "^0.2.3",
     "jest": "^27.5.1",

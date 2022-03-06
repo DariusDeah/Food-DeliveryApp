@@ -20,23 +20,11 @@ class FoodService {
         });
     }
     //FIXME this isn't logical
-    getFood(req) {
+    getFood(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [query] = Object.entries(req);
-            if (query) {
-                const food = yield this.getByQuery(query);
-                return food;
-            }
-            const food = yield Food_1.FoodDB.find();
-            return food;
-        });
-    }
-    getByQuery(query) {
-        return __awaiter(this, void 0, void 0, function* () {
-            console.log(query);
-            const food = yield Food_1.FoodDB.find(`${query[0]}`, `${query[1]}`);
-            if (!food)
-                throw new Errors_1.NotFoundException;
+            const food = yield Food_1.FoodDB.find(query);
+            if (!food.length)
+                throw new Errors_1.NotFoundException();
             return food;
         });
     }

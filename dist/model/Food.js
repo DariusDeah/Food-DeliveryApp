@@ -14,13 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FoodDB = void 0;
 const DB_config_1 = __importDefault(require("../DB.config"));
-// interface IFood{
-//   name: string
-//   price: number
-//   size: string
-//   calories: number
-//   isActive: boolean 
-// }
 class Food {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -41,13 +34,28 @@ class Food {
             return newFood;
         });
     }
-    find(query, value) {
+    find(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            //if theres a query find by the query otherwise retrive all from the table
-            const sql = `SELECT * From foods ${query && value ? `WHERE ${query} ="${value}"` : ''}`;
-            console.log(sql);
+            const queries = Object.keys(query);
+            if (queries.length) {
+                const food = yield this.findByQuery(query);
+                return food;
+            }
+            //if theres a query find by the query otherwise retrieve all from the table
+            const sql = `SELECT * From foods`;
             const food = yield DB_config_1.default.query(sql);
-            // food[1] = undefined
+            return food[0];
+        });
+    }
+    findByQuery(query) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const queries = Object.keys(query);
+            const queryValues = Object.values(query);
+            const sql = `SELECT * FROM foods
+     WHERE ${queries[0]} = '${queryValues[0]}'
+      AND ${queries[1]} = '${queryValues[1]}'`;
+            const food = yield DB_config_1.default.query(sql);
+            console.log(sql);
             return food[0];
         });
     }

@@ -51,16 +51,30 @@ class FoodsTest {
         });
     }
     postRequest() {
-        describe('if post request is successful', () => {
+        describe('POST /foods', () => {
+            describe('if post request is successful', () => {
+                const reqBody = {
+                    name: "endpointTest",
+                    price: "1234",
+                    size: "small",
+                    calories: 44,
+                    image: null,
+                };
+                it('should return 201', () => __awaiter(this, void 0, void 0, function* () {
+                    yield (0, supertest_1.default)(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201);
+                }));
+            });
+        });
+        describe('If POST request is unsuccessful', () => {
             const reqBody = {
-                name: "endpointTest",
-                price: "1234",
-                size: "small",
+                name: "dwfw",
+                price: "12",
+                size: "",
                 calories: 44,
                 image: null,
             };
-            it('should return 201', () => __awaiter(this, void 0, void 0, function* () {
-                yield (0, supertest_1.default)(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201);
+            it('should return a 400', () => __awaiter(this, void 0, void 0, function* () {
+                yield (0, supertest_1.default)(this.ApiServer).post(this.baseRoute).send(reqBody).expect(400);
             }));
         });
     }

@@ -10,19 +10,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodService = void 0;
+const foodValidator_1 = require("../helpers/foodValidator");
 const Food_1 = require("../model/Food");
 const Errors_1 = require("../utils/Errors");
 class FoodService {
     createFood(foodData) {
         return __awaiter(this, void 0, void 0, function* () {
+            const food = (0, foodValidator_1.foodValidator)(foodData);
+            if (!food)
+                throw new Errors_1.BadRequestException();
             const createdFood = yield Food_1.FoodDB.create(foodData);
             return createdFood;
         });
     }
-    //FIXME this isn't logical
     getFood(query) {
         return __awaiter(this, void 0, void 0, function* () {
             const food = yield Food_1.FoodDB.find(query);
+            console.log(food);
             if (!food.length)
                 throw new Errors_1.NotFoundException();
             return food;

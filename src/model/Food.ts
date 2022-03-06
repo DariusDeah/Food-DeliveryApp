@@ -1,6 +1,7 @@
 import db from "../DB.config"
  class Food {
-  async create(data: { name: string, price: number, size: string, calories: number }) {
+   async create(data: { name: string, price: number, size: string, calories: number }) {
+   
     let sql = `INSERT INTO foods (
       name,
       price,
@@ -14,7 +15,8 @@ import db from "../DB.config"
        ${data.calories}
     )`
     console.log(data)
-    const [newFood, _] = await db.execute(sql)
+     const [newFood, _] = await db.execute(sql)
+  
     return newFood;
   }
    async find(query?: {}) {

@@ -4,6 +4,7 @@ exports.foodValidator = void 0;
 const foodValidator = (foodData) => {
     if (foodData.name.length)
         if (foodData.price > 0)
+            //this needs to be more dynamic
             if (foodData.size === 'small' || foodData.size === 'large' || foodData.size === 'medium')
                 return foodData;
     return undefined;

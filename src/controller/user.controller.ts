@@ -6,6 +6,7 @@ class UserController extends BaseController {
   constructor() {
     super('api/v1/users')
     this.router.route(this.baseRoute).post(this.createUser)
+    
   }
   async createUser(req:Request,res:Response,next:NextFunction): Promise<void> {
   try {
@@ -19,3 +20,4 @@ class UserController extends BaseController {
   }
 }
 }
+const userController = new UserController();

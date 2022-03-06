@@ -34,3 +34,4 @@ class UserController extends controller_config_1.default {
         });
     }
 }
+const userController = new UserController();

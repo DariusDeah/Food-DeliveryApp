@@ -7,6 +7,7 @@ exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
 const food_controller_1 = require("./controller/food.controller");
+const Error_handler_1 = require("./handlers/Error.handler");
 class App {
     constructor() {
         this.app = (0, express_1.default)();
@@ -19,6 +20,8 @@ class App {
     }
     useRoutes() {
         this.app.use('/', food_controller_1.foodController.router);
+        Error_handler_1.ErrorHandlers.error(this.app);
+        Error_handler_1.ErrorHandlers.routerError(this.app);
     }
 }
 exports.app = new App();

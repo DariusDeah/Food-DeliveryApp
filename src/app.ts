@@ -1,6 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import { foodController } from './controller/food.controller';
+import { ErrorHandlers } from './handlers/Error.handler';
  class App{
    app: express.Application;
   constructor() {
@@ -14,7 +15,9 @@ import { foodController } from './controller/food.controller';
     
   }
   private useRoutes() {
-    this.app.use('/',foodController.router)
+    this.app.use('/', foodController.router)
+    ErrorHandlers.error(this.app)
+    ErrorHandlers.routerError(this.app);
   }
 }
 export const app = new App()

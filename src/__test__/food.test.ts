@@ -57,7 +57,7 @@ class FoodsTest {
     })
     describe('If POST request is unsuccessful', () => {
       const reqBody = {
-         name: "dwfw",
+             name: "dwfw",
               price: "12",
               size: "",
               calories: 44,

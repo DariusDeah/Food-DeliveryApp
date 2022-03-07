@@ -15,24 +15,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FoodDB = void 0;
 const DB_config_1 = __importDefault(require("../DB.config"));
 class Food {
-    create(data) {
+    create(food) {
         return __awaiter(this, void 0, void 0, function* () {
-            let sql = `INSERT INTO foods (
+            let sqlQuery = `INSERT INTO foods (
       name,
       price,
       size,
       calories
-      ${data.image ? ',image' : ''}
+      ${food.image ? ',image' : ''}
     )
     VALUES(
       name,
       price,
       size,
       calories
-      ${data.image ? ',image' : ''}
+      ${food.image ? ',image' : ''}
     )`;
-            const [newFood, _] = yield DB_config_1.default.query(sql, data);
-            return newFood;
+            const [createdFood, _] = yield DB_config_1.default.query(sqlQuery, food);
+            return createdFood;
         });
     }
     find(query) {

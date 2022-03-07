@@ -1,23 +1,23 @@
 import db from "../DB.config"
 import { IFood } from "../interfaces/food.interface";
  class Food {
-   async create(data:IFood) {
-    let sql = `INSERT INTO foods (
+   async create(food:IFood) {
+    let sqlQuery = `INSERT INTO foods (
       name,
       price,
       size,
       calories
-      ${data.image ? ',image' : ''}
+      ${food.image ? ',image' : ''}
     )
     VALUES(
       name,
       price,
       size,
       calories
-      ${data.image ? ',image' : ''}
+      ${food.image ? ',image' : ''}
     )`
-     const [newFood, _] = await db.query(sql,data)
-    return newFood;
+     const [ createdFood, _] = await db.query(sqlQuery,food)
+    return createdFood;
   }
    async find(query?: {}) {
      const queryKeys = Object.keys(query)

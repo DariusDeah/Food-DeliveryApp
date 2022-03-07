@@ -1,6 +1,6 @@
  export interface IFood{
    name: string,
-   price: number,
+   price: number|string,
    size:sizes ,
    calories:number,
    image?: string | null

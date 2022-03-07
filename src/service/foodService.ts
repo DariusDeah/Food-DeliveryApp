@@ -7,8 +7,8 @@ import { BadRequestException, NotFoundException } from "../utils/Errors";
 class FoodService{
   async createFood(foodData: IFood) {
     const food = foodValidator(foodData);
-    if(food !== foodData) throw new BadRequestException(food);
-    const createdFood = await FoodDB.create(foodData)
+    if(typeof food === 'string' ) throw new BadRequestException(food);
+    const createdFood = await FoodDB.create(food)
     return createdFood
   }
   async getFood(query:ParsedQs) {

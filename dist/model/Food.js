@@ -51,9 +51,10 @@ class Food {
         return __awaiter(this, void 0, void 0, function* () {
             const queries = Object.keys(query);
             const queryValues = Object.values(query);
-            const sql = `SELECT * FROM foods
-     WHERE ${queries[0]} = '${queryValues[0]}'
-      AND ${queries[1]} = '${queryValues[1]}'`;
+            const sql = `SELECT id,name,price,size,image FROM foods
+                    WHERE ${queries[0]} = '${queryValues[0]}'
+                  ${queries.length > 1 ?
+                `AND ${queries[1]} = '${queryValues[1]}'` : ''}`;
             const food = yield DB_config_1.default.query(sql);
             console.log(sql);
             return food[0];
@@ -61,7 +62,7 @@ class Food {
     }
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const sql = `SELECT * FROM foods WHERE id = ${id}`;
+            const sql = `SELECT id,name,price,size,image FROM foods WHERE id = ${id}`;
             const food = yield DB_config_1.default.query(sql);
             return food[0];
         });

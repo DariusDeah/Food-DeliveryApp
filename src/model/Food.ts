@@ -34,16 +34,17 @@ import db from "../DB.config"
      const queries: string[] = Object.keys(query);
      const queryValues:string[] = Object.values(query)
 
-     const sql =
-     `SELECT * FROM foods
-     WHERE ${queries[0]} = '${queryValues[0]}'
-      AND ${queries[1]} = '${queryValues[1]}'`
+     const sql =`SELECT id,name,price,size,image FROM foods
+                    WHERE ${queries[0]} = '${queryValues[0]}'
+                  ${ queries.length > 1 ?
+                  `AND ${queries[1]} = '${queryValues[1]}'` : ''
+     }`
      const food = await db.query(sql)
      console.log(sql)
      return food[0]
    }
   async findById(id:string) {
-    const sql = `SELECT * FROM foods WHERE id = ${id}`
+    const sql = `SELECT id,name,price,size,image FROM foods WHERE id = ${id}`
     const food = await db.query(sql)
     return food[0]
   }

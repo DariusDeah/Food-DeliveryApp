@@ -17,7 +17,7 @@ class User {
     create(userData) {
         return __awaiter(this, void 0, void 0, function* () {
             `INSERT INTO users (first_name,last_name,email) 
-    VALUES(${userData.first_name},${userData.last_name},${userData.email})`;
+    VALUES(${userData.first_name},${userData.last_name},${userData.email},${userData.password})`;
         });
     }
     find() {

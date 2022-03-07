@@ -4,7 +4,7 @@ import {  FoodDB } from "../model/Food";
 import { BadRequestException, NotFoundException } from "../utils/Errors";
 
 class FoodService{
-  async createFood(foodData: { name: string, price: number, size: string, calories: number }) {
+  async createFood(foodData: { name: string, price: number, size: string, calories: number,image:string}) {
     const food = foodValidator(foodData);
     if(food !== foodData) throw new BadRequestException(food);
     const createdFood = await FoodDB.create(foodData)

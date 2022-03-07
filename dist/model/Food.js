@@ -21,16 +21,11 @@ class Food {
       name,
       price,
       size,
-      calories
+      calories,
+      ${data.image ? 'image' : ';'}
     )
-    VALUES(
-      '${data.name}',
-       ${data.price},
-       '${data.size}',
-       ${data.calories}
-    )`;
-            console.log(data);
-            const [newFood, _] = yield DB_config_1.default.execute(sql);
+    VALUES(?,?,?,?,?)`;
+            const [newFood, _] = yield DB_config_1.default.query(sql, [data.name, data.price, data.size, data.calories, data.image]);
             return newFood;
         });
     }

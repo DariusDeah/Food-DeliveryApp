@@ -37,8 +37,8 @@ class Food {
     }
     find(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const queries = Object.keys(query);
-            if (queries.length) {
+            const queryKeys = Object.keys(query);
+            if (queryKeys.length) {
                 const food = yield this.findByQuery(query);
                 return food;
             }
@@ -50,12 +50,12 @@ class Food {
     }
     findByQuery(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const queries = Object.keys(query);
+            const queryKeys = Object.keys(query);
             const queryValues = Object.values(query);
             const sql = `SELECT id,name,price,size,image FROM foods
-                    WHERE ${queries[0]} = '${queryValues[0]}'
-                  ${queries.length > 1 ?
-                `AND ${queries[1]} = '${queryValues[1]}'` : ''}`;
+                    WHERE ${queryKeys[0]} = '${queryValues[0]}'
+                  ${queryKeys.length > 1 ?
+                `AND ${queryKeys[1]} = '${queryValues[1]}'` : ''}`;
             const food = yield DB_config_1.default.query(sql);
             console.log(sql);
             return food[0];

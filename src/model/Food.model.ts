@@ -1,20 +1,27 @@
 import db from "../DB.config"
+import { IFood } from "../interfaces/food.interface";
  class Food {
-   async create(data: { name: string, price: number, size: string, calories: number,image?:string }) {
+   async create(data:IFood) {
     let sql = `INSERT INTO foods (
       name,
       price,
       size,
-      calories,
-      ${data.image ? 'image' : ';'}
+      calories
+      ${data.image ? ',image' : ''}
     )
-    VALUES(?,?,?,?,?)`
-     const [newFood, _] = await db.query(sql,[data.name,data.price,data.size,data.calories,data.image])
+    VALUES(
+      name,
+      price,
+      size,
+      calories
+      ${data.image ? ',image' : ''}
+    )`
+     const [newFood, _] = await db.query(sql,data)
     return newFood;
   }
    async find(query?: {}) {
-     const queries = Object.keys(query)
-     if (queries.length) {
+     const queryKeys = Object.keys(query)
+     if (queryKeys.length) {
       const food = await this.findByQuery(query)
        return food
     }
@@ -24,13 +31,13 @@ import db from "../DB.config"
     return food[0]
    }
    private async findByQuery(query: {}) {
-     const queries: string[] = Object.keys(query);
+     const queryKeys: string[] = Object.keys(query);
      const queryValues:string[] = Object.values(query)
 
      const sql =`SELECT id,name,price,size,image FROM foods
-                    WHERE ${queries[0]} = '${queryValues[0]}'
-                  ${ queries.length > 1 ?
-                  `AND ${queries[1]} = '${queryValues[1]}'` : ''
+                    WHERE ${queryKeys[0]} = '${queryValues[0]}'
+                  ${ queryKeys.length > 1 ?
+                  `AND ${queryKeys[1]} = '${queryValues[1]}'` : ''
      }`
      const food = await db.query(sql)
      console.log(sql)

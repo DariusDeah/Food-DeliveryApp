@@ -47,7 +47,7 @@ class FoodsTest {
               price: "1234",
               size: "small",
               calories: 44,
-              image: null,
+              image: "",
               }
         it('should return 201', async () => {
           await supertest(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201)

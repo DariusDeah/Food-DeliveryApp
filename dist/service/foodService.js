@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodService = void 0;
 const foodValidator_1 = require("../helpers/foodValidator");
-const Food_1 = require("../model/Food");
+const Food_model_1 = require("../model/Food.model");
 const Errors_1 = require("../utils/Errors");
 class FoodService {
     createFood(foodData) {
@@ -19,13 +19,13 @@ class FoodService {
             const food = (0, foodValidator_1.foodValidator)(foodData);
             if (food !== foodData)
                 throw new Errors_1.BadRequestException(food);
-            const createdFood = yield Food_1.FoodDB.create(foodData);
+            const createdFood = yield Food_model_1.FoodDB.create(foodData);
             return createdFood;
         });
     }
     getFood(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = yield Food_1.FoodDB.find(query);
+            const food = yield Food_model_1.FoodDB.find(query);
             if (!food.length)
                 throw new Errors_1.NotFoundException();
             return food;
@@ -33,7 +33,7 @@ class FoodService {
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = yield Food_1.FoodDB.findById(id);
+            const food = yield Food_model_1.FoodDB.findById(id);
             if (!food.length)
                 throw new Errors_1.NotFoundException();
             return food;

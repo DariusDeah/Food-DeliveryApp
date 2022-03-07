@@ -4,8 +4,9 @@ import { foodService } from "../service/foodService"
 import { foodMaker } from "../utils/data"
 import BaseController from "./controller.config"
  class FoodController extends BaseController {
-  constructor() {
-    super('/api/v1/foods') //baseroute
+   constructor() {
+     super('/api/v1/foods') //baseroute
+     
     this.router.route(this.baseRoute)
       .get(this.getFoods)
       .post(this.createFood)

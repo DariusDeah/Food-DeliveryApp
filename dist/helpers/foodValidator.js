@@ -1,21 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodValidator = void 0;
-const validate = (foodData) => {
-    if (foodData.name.length)
-        if (foodData.price > 0)
-            //this needs to be more dynamic
-            if (foodData.size === 'small' || foodData.size === 'large' || foodData.size === 'medium')
-                return foodData;
-    return undefined;
-};
+const food_interface_1 = require("../interfaces/food.interface");
 const foodValidator = (foodData) => {
     if (!foodData.name.length || !foodData.name)
         return 'name required';
     if (foodData.price < 0 || !foodData.price)
         return 'price must be valid amount';
-    if (!foodData.size)
+    if (!foodData.size.length)
         return 'size required';
+    if (foodData.size !== food_interface_1.sizes.small | food_interface_1.sizes.medium | food_interface_1.sizes.large)
+        return `invalid size ${foodData.size},sizes must be between ${food_interface_1.sizes.small},${food_interface_1.sizes.medium} and ${food_interface_1.sizes.large}`;
     if (!foodData.calories)
         return 'calories required';
     console.log({ foodData });

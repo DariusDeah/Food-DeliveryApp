@@ -1,6 +1,7 @@
 import supertest from 'supertest';
 import { app } from '../app';
 import { foodController } from '../controllers/food.controller';
+import { FoodDTO, sizes } from '../interfaces/food.interface';
 class FoodsTest {
   private ApiServer: Express.Application;
   //taking the base route for the api endpoint from the controller to make testing more dynamic
@@ -42,10 +43,10 @@ class FoodsTest {
   private postRequest() {
     describe('POST /foods', () => {
       describe('if post request is successful', () => {
-        const reqBody = {
+        const reqBody:FoodDTO = {
               name: "endpointTest",
               price: "1234",
-              size: "small",
+              size: sizes.small,
               calories: 44,
               image: "",
               }

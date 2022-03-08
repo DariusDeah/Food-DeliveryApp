@@ -1,7 +1,7 @@
 import db from "../DB.config"
-import { IFood } from "../interfaces/food.interface";
- class Food {
-   async create(food: IFood) {
+import { FoodDTO } from "../interfaces/food.interface";
+ class FoodTable {
+   async create(food: FoodDTO):Promise<FoodDTO> {
      console.log(food.image)
     let sqlQuery = `INSERT INTO foods (
       name,
@@ -17,11 +17,11 @@ import { IFood } from "../interfaces/food.interface";
       ?
       ${food.image ? ',?' : ''}
     )`
-     const [createdFood] = await db.query(sqlQuery,[food.name,food.price,food.size,food.calories,food.image ? food.image : ''])
+     const [createdFood,_] = await db.query(sqlQuery,[food.name,food.price,food.size,food.calories,food.image ? food.image : ''])
      console.log(createdFood)
     return createdFood;
   }
-   async find(query?: {}) {
+   async find(query?: {}):Promise<FoodDTO> {
      const queryKeys = Object.keys(query)
      if (queryKeys.length) {
       const food = await this.findByQuery(query)
@@ -32,7 +32,7 @@ import { IFood } from "../interfaces/food.interface";
     const food = await db.query(sql)
     return food[0]
    }
-   private async findByQuery(query: {}) {
+   private async findByQuery(query: {}):Promise<FoodDTO> {
      const queryKeys: string[] = Object.keys(query);
      const queryValues:string[] = Object.values(query)
 
@@ -45,11 +45,11 @@ import { IFood } from "../interfaces/food.interface";
      console.log(sql)
      return food[0]
    }
-  async findById(id:string) {
+  async findById(id:string):Promise<FoodDTO> {
     const sql = `SELECT id,name,price,size,image FROM foods WHERE id = ${id}`
     const food = await db.query(sql)
     return food[0]
   }
   
 }
-export const FoodDB = new Food()
+export const FoodDB = new FoodTable()

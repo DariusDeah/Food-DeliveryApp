@@ -16,12 +16,14 @@ class App {
         this.useRoutes();
     }
     useMiddleware() {
-        this.app.use((0, helmet_1.default)());
-        this.app.use((0, express_mongo_sanitize_1.default)());
-        this.app.use(express_1.default.json({ limit: '20mb' }));
+        const app = this.app;
+        app.use((0, helmet_1.default)());
+        app.use((0, express_mongo_sanitize_1.default)());
+        app.use(express_1.default.json({ limit: '20mb' }));
     }
     useRoutes() {
-        this.app.use('/', food_controller_1.foodController.router);
+        const app = this.app;
+        app.use('/', food_controller_1.foodController.router);
         Error_handler_1.ErrorHandlers.error(this.app);
         Error_handler_1.ErrorHandlers.routerError(this.app);
     }

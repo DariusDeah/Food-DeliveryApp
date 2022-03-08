@@ -1,4 +1,5 @@
- export interface IFood{
+export interface FoodDTO{
+   id?: number;
    name: string,
    price: number|string,
    size:sizes ,

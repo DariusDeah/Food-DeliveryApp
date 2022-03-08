@@ -24,10 +24,10 @@ const multerFilter = (req, file, next) => __awaiter(void 0, void 0, void 0, func
     next(null, true);
 });
 exports.upload = (0, multer_1.default)({ dest: 'uploads', fileFilter: multerFilter });
-const uploadFile = (file, reqBody) => {
+const uploadFile = (file, food) => {
     const fileStream = node_fs_1.default.createReadStream(file.path);
     const extension = file.mimetype.split('/')[1];
-    const Key = `${reqBody.size}-${reqBody.name}-${Date.now()}.${extension}`;
+    const Key = `${food.size}-${food.name}-${Date.now()}.${extension}`;
     const uploadParams = {
         Bucket: process.env.S3_Name,
         Body: fileStream,

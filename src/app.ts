@@ -5,19 +5,22 @@ import { ErrorHandlers } from './handlers/Error.handler';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 import multer from 'multer';
  class App{
-   app: express.Application;
-  constructor() {
-    this.app = express();
+   app: express.Application = express();
+   constructor() {
     this.useMiddleware()
     this.useRoutes()
   }
    private useMiddleware() {
-     this.app.use(helmet())
-     this.app.use(ExpressMongoSanitize())
-     this.app.use(express.json({ limit: '20mb' }))
+    const app = this.app;
+
+     app.use(helmet())
+     app.use(ExpressMongoSanitize())
+     app.use(express.json({ limit: '20mb' }))
   }
-  private useRoutes() {
-    this.app.use('/', foodController.router)
+   private useRoutes() {
+     const app = this.app;
+     
+    app.use('/', foodController.router)
     ErrorHandlers.error(this.app)
     ErrorHandlers.routerError(this.app);
   }

@@ -1,20 +1,17 @@
-import { NextFunction ,Request,Response } from "express"
+import { NextFunction ,Request,Response, Router } from "express"
 import { foodService } from "../service/foodService"
 import { foodMaker } from "../utils/data"
 import BaseController from "./controller.config"
 import { upload, uploadFile } from "../middlewares/multer.config"
 import { setImage } from "../helpers/setImage"
-import { IFood } from "../interfaces/food.interface"
- class FoodController extends BaseController {
-   constructor() {
-     super('/api/v1/foods') //baseroute
+import { FoodDTO } from "../interfaces/food.interface"
+class FoodController extends BaseController {
+  constructor() {
+    super('/api/v1/foods') //baseroute
      
     this.router.route(this.baseRoute)
       .get(this.getFoods)
-      .post(
-        upload.single('image'),
-        this.createFood
-      )
+      .post(upload.single('image'),this.createFood)
     
     this.router.route(this.baseRoute + '/:id')
       .get(this.getById)
@@ -37,13 +34,11 @@ import { IFood } from "../interfaces/food.interface"
   private async createFood(req: Request, res: Response, next: NextFunction):Promise<void> {
     try {
       //validate and set image on request body
-      console.log('1', req.body)
       setImage(req.body, req.file)
-      console.log(req.body.image)
-     await uploadFile(req.file,req.body)
-      console.log(req.body)
-      const food: IFood = req.body;
+      const food: FoodDTO = req.body;
       await foodService.createFood(food)
+      //send to s3 after all request validation has been made and item is created 
+      await uploadFile(req.file,food)
       
      res.status(201).json({
        status: 'success',

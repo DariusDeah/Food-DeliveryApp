@@ -7,11 +7,8 @@ const express_1 = __importDefault(require("express"));
 class BaseController {
     constructor(baseRoute) {
         this.app = (0, express_1.default)();
-        this._router = express_1.default.Router();
+        this.router = express_1.default.Router();
         this.baseRoute = baseRoute;
-    }
-    get router() {
-        return this._router;
     }
 }
 exports.default = BaseController;

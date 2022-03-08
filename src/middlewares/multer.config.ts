@@ -3,6 +3,7 @@ import { BadRequestException } from '../utils/Errors';
 import { json, NextFunction, Request, Response } from 'express';
 import fs from 'node:fs';
 import { UberEats_Clone_Folder } from '../aws/s3.congifg'
+import { IFood } from '../interfaces/food.interface';
 
 
 const multerFilter = async (req:Request,file,next) => {
@@ -12,10 +13,11 @@ const multerFilter = async (req:Request,file,next) => {
 }
 export const upload = multer({ dest: 'uploads',fileFilter:multerFilter })
 
-export const uploadFile = (file,reqBody:Request) => {
+export const uploadFile = (file,food:IFood) => {
   const fileStream = fs.createReadStream(file.path)
   const extension = file.mimetype.split('/')[1]
-  const Key = `${reqBody.size}-${reqBody.name}-${Date.now()}.${extension}`
+  const Key = `${food.size}-${food.name}-${Date.now()}.${extension}`
+
   const uploadParams = {
     Bucket: process.env.S3_Name,
     Body: fileStream,

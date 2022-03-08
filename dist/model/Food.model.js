@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FoodDB = void 0;
 const DB_config_1 = __importDefault(require("../DB.config"));
-class Food {
+class FoodTable {
     create(food) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log(food.image);
@@ -32,7 +32,7 @@ class Food {
       ?
       ${food.image ? ',?' : ''}
     )`;
-            const [createdFood] = yield DB_config_1.default.query(sqlQuery, [food.name, food.price, food.size, food.calories, food.image ? food.image : '']);
+            const [createdFood, _] = yield DB_config_1.default.query(sqlQuery, [food.name, food.price, food.size, food.calories, food.image ? food.image : '']);
             console.log(createdFood);
             return createdFood;
         });
@@ -71,4 +71,4 @@ class Food {
         });
     }
 }
-exports.FoodDB = new Food();
+exports.FoodDB = new FoodTable();

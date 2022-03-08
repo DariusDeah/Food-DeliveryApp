@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const app_1 = require("../app");
 const food_controller_1 = require("../controllers/food.controller");
+const food_interface_1 = require("../interfaces/food.interface");
 class FoodsTest {
     constructor() {
         //taking the base route for the api endpoint from the controller to make testing more dynamic
@@ -56,7 +57,7 @@ class FoodsTest {
                 const reqBody = {
                     name: "endpointTest",
                     price: "1234",
-                    size: "small",
+                    size: food_interface_1.sizes.small,
                     calories: 44,
                     image: "",
                 };

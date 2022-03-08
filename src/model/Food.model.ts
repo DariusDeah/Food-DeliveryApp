@@ -1,7 +1,8 @@
 import db from "../DB.config"
 import { IFood } from "../interfaces/food.interface";
  class Food {
-   async create(food:IFood) {
+   async create(food: IFood) {
+     console.log(food.image)
     let sqlQuery = `INSERT INTO foods (
       name,
       price,
@@ -10,13 +11,14 @@ import { IFood } from "../interfaces/food.interface";
       ${food.image ? ',image' : ''}
     )
     VALUES(
-      name,
-      price,
-      size,
-      calories
-      ${food.image ? ',image' : ''}
+       ?,
+       ?,
+      ?,
+      ?
+      ${food.image ? ',?' : ''}
     )`
-     const [ createdFood, _] = await db.query(sqlQuery,food)
+     const [createdFood] = await db.query(sqlQuery,[food.name,food.price,food.size,food.calories,food.image ? food.image : ''])
+     console.log(createdFood)
     return createdFood;
   }
    async find(query?: {}) {

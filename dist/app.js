@@ -18,7 +18,7 @@ class App {
     useMiddleware() {
         this.app.use((0, helmet_1.default)());
         this.app.use((0, express_mongo_sanitize_1.default)());
-        this.app.use(express_1.default.json({ limit: '10mb' }));
+        this.app.use(express_1.default.json({ limit: '20mb' }));
     }
     useRoutes() {
         this.app.use('/', food_controller_1.foodController.router);

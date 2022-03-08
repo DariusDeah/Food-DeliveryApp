@@ -13,15 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodController = void 0;
-const validateRequestBody_1 = require("../helpers/validateRequestBody");
 const foodService_1 = require("../service/foodService");
 const controller_config_1 = __importDefault(require("./controller.config"));
+const multer_config_1 = require("../middlewares/multer.config");
+const setImage_1 = require("../helpers/setImage");
 class FoodController extends controller_config_1.default {
     constructor() {
         super('/api/v1/foods'); //baseroute
         this.router.route(this.baseRoute)
             .get(this.getFoods)
-            .post(this.createFood);
+            .post(multer_config_1.upload.single('image'), this.createFood);
         this.router.route(this.baseRoute + '/:id')
             .get(this.getById);
         this.router.route(this.baseRoute + '/stats')
@@ -45,11 +46,17 @@ class FoodController extends controller_config_1.default {
     createFood(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const foods = (0, validateRequestBody_1.validateRequestBody)(req.body, ["name", "price", "size", "calories", "image"]);
-                yield foodService_1.foodService.createFood(foods);
+                //validate and set image on request body
+                console.log('1', req.body);
+                (0, setImage_1.setImage)(req.body, req.file);
+                console.log(req.body.image);
+                yield (0, multer_config_1.uploadFile)(req.file, req.body);
+                console.log(req.body);
+                const food = req.body;
+                yield foodService_1.foodService.createFood(food);
                 res.status(201).json({
                     status: 'success',
-                    data: foods
+                    data: food
                 });
             }
             catch (error) {

@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import { foodController } from './controllers/food.controller';
 import { ErrorHandlers } from './handlers/Error.handler';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
+import multer from 'multer';
  class App{
    app: express.Application;
   constructor() {
@@ -13,8 +14,7 @@ import ExpressMongoSanitize from 'express-mongo-sanitize';
    private useMiddleware() {
      this.app.use(helmet())
      this.app.use(ExpressMongoSanitize())
-   this.app.use( express.json({limit:'10mb'}))
-    
+     this.app.use(express.json({ limit: '20mb' }))
   }
   private useRoutes() {
     this.app.use('/', foodController.router)

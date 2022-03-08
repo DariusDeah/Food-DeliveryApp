@@ -31,7 +31,7 @@ class FoodController extends controller_config_1.default {
     getFoods(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                let foods = yield foodService_1.foodService.getFood(req.query);
+                const foods = yield foodService_1.foodService.getFood(req.query);
                 res.status(200).json({
                     status: 'success',
                     results: foods.length,

@@ -20,7 +20,7 @@ class FoodController extends BaseController {
   }
   private async getFoods(req: Request, res: Response,next: NextFunction):Promise<void>{
   try {
-    let foods = await foodService.getFood(req.query)
+    const foods:FoodDTO = await foodService.getFood(req.query)
 
     res.status(200).json({
       status: 'success',
@@ -50,7 +50,7 @@ class FoodController extends BaseController {
  }
    private async getById(req: Request, res: Response, next: NextFunction):Promise<void> {
       try {
-        const food = await foodService.getById(req.params.id)
+        const food:FoodDTO = await foodService.getById(req.params.id)
 
         res.status(200).json({
           status: 'success',

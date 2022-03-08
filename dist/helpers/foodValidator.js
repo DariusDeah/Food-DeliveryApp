@@ -2,27 +2,23 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodValidator = void 0;
 const food_interface_1 = require("../interfaces/food.interface");
+const Validation_1 = require("./Validation");
 const foodValidator = (foodData) => {
-    const validationSchema = {
-        name: !foodData.name || !foodData.name.length,
+    const validationErrors = {
         nameErrorMessage: "name required",
-        price: !foodData.price || foodData.price <= 0,
         priceErrorMessage: "price required and must be a valid amount",
-        size: !foodData.size ||
-            !foodData.size.length ||
-            foodData.size !== food_interface_1.sizes.small && foodData.size !== food_interface_1.sizes.medium && foodData.size !== food_interface_1.sizes.large,
         sizeErrorMessage: `invalid size ${foodData.size}, sizes must be between ${food_interface_1.sizes.small}, ${food_interface_1.sizes.medium} and ${food_interface_1.sizes.large}`,
-        calories: !foodData.calories,
         caloriesErrorMessage: "calories required",
     };
-    if (validationSchema.name)
-        return validationSchema.nameErrorMessage;
-    if (validationSchema.price)
-        return validationSchema.priceErrorMessage;
-    if (validationSchema.size)
-        return validationSchema.sizeErrorMessage;
-    if (validationSchema.calories)
-        return validationSchema.caloriesErrorMessage;
+    //name validation
+    Validation_1.Validation.requiredString(foodData.name, validationErrors.nameErrorMessage);
+    //size validation
+    Validation_1.Validation.requiredString(foodData.size, 'size required');
+    Validation_1.Validation.matchesValues(foodData.size, [food_interface_1.sizes.small, food_interface_1.sizes.medium, food_interface_1.sizes.large], validationErrors.sizeErrorMessage);
+    //price validation
+    Validation_1.Validation.requiredString(foodData.price, validationErrors.priceErrorMessage);
+    //calories validation
+    Validation_1.Validation.requiredInt(foodData.calories, validationErrors.caloriesErrorMessage);
     return foodData;
 };
 exports.foodValidator = foodValidator;

@@ -1,28 +1,25 @@
-import { IFood, sizes } from "../interfaces/food.interface";
+import { FoodDTO, sizes } from "../interfaces/food.interface";
+import { Validation } from "./Validation";
 
-export const foodValidator = (foodData: IFood) => {
-  const validationSchema = {
-    name: !foodData.name || !foodData.name.length,
+export const foodValidator = (foodData: FoodDTO) => {
+   const validationErrors = {
     nameErrorMessage: "name required",
-
-    price: !foodData.price || foodData.price <= 0,
     priceErrorMessage: "price required and must be a valid amount",
-
-    size:
-      !foodData.size ||
-      !foodData.size.length ||
-      foodData.size !== sizes.small && foodData.size !== sizes.medium && foodData.size !== sizes.large,
-    sizeErrorMessage: 
-    `invalid size ${foodData.size}, sizes must be between ${sizes.small}, ${sizes.medium} and ${sizes.large}`,
-    
-    calories: !foodData.calories,
+    sizeErrorMessage: `invalid size ${foodData.size}, sizes must be between ${sizes.small}, ${sizes.medium} and ${sizes.large}`,
     caloriesErrorMessage: "calories required",
   };
 
-  if (validationSchema.name) return validationSchema.nameErrorMessage;
-  if (validationSchema.price) return validationSchema.priceErrorMessage;
-  if (validationSchema.size) return validationSchema.sizeErrorMessage;
-  if (validationSchema.calories) return validationSchema.caloriesErrorMessage;
+ //name validation
+  Validation.requiredString(foodData.name, validationErrors.nameErrorMessage)
+  //size validation
+  Validation.requiredString(foodData.size, 'size required')
+  Validation.matchesValues(foodData.size, [sizes.small, sizes.medium, sizes.large], validationErrors.sizeErrorMessage)
+  //price validation
+  Validation.requiredString(foodData.price, validationErrors.priceErrorMessage)
+  //calories validation
+  Validation.requiredInt(foodData.calories, validationErrors.caloriesErrorMessage)
 
-  return foodData;
+  return foodData
 };
+
+ 

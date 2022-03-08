@@ -11,11 +11,9 @@ export const foodValidator = (foodData: IFood) => {
     size:
       !foodData.size ||
       !foodData.size.length ||
-      !sizes.small ||
-      !sizes.medium||
-      !sizes.large,
-    sizeErrorMessage: `invalid size ${foodData.size},
-    sizes must be between ${sizes.small}, ${sizes.medium} and ${sizes.large}`,
+      foodData.size !== sizes.small && foodData.size !== sizes.medium && foodData.size !== sizes.large,
+    sizeErrorMessage: 
+    `invalid size ${foodData.size}, sizes must be between ${sizes.small}, ${sizes.medium} and ${sizes.large}`,
     
     calories: !foodData.calories,
     caloriesErrorMessage: "calories required",

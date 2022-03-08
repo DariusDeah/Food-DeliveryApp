@@ -10,11 +10,8 @@ const foodValidator = (foodData) => {
         priceErrorMessage: "price required and must be a valid amount",
         size: !foodData.size ||
             !foodData.size.length ||
-            !food_interface_1.sizes.small ||
-            !food_interface_1.sizes.medium ||
-            !food_interface_1.sizes.large,
-        sizeErrorMessage: `invalid size ${foodData.size},
-    sizes must be between ${food_interface_1.sizes.small}, ${food_interface_1.sizes.medium} and ${food_interface_1.sizes.large}`,
+            foodData.size !== food_interface_1.sizes.small && foodData.size !== food_interface_1.sizes.medium && foodData.size !== food_interface_1.sizes.large,
+        sizeErrorMessage: `invalid size ${foodData.size}, sizes must be between ${food_interface_1.sizes.small}, ${food_interface_1.sizes.medium} and ${food_interface_1.sizes.large}`,
         calories: !foodData.calories,
         caloriesErrorMessage: "calories required",
     };

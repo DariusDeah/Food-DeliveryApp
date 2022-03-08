@@ -5,7 +5,7 @@ import fs from 'node:fs';
 import { UberEats_Clone_Folder } from '../aws/s3.congifg'
 
 
-const multerFilter = async (req, file,next) => {
+const multerFilter = async (req:Request,file,next) => {
   console.log({ file })
   if (!file.mimetype.startsWith('image')) next(new BadRequestException('invalid file type: ' + file.mimetype))
    next(null,true)

@@ -16,7 +16,7 @@ class FoodsTest {
     describe('GET /foods/:id', () => {
       describe('if food does not exist ', () => {
         it('should return 404', async () => {
-          const foodId = '123'
+          const foodId = '12345678910'
           await supertest(this.ApiServer).get(`${this.baseRoute}/${foodId}`).expect(404)
         });
         describe('if food does exist', () => {
@@ -61,7 +61,7 @@ class FoodsTest {
               price: "12",
               size: "",
               calories: 44,
-              image: null,
+              image: "",
       }
       it('should return a 400', async () => {
         await supertest(this.ApiServer).post(this.baseRoute).send(reqBody).expect(400)

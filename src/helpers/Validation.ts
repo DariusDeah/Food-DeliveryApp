@@ -15,8 +15,10 @@ return
   public static matchesValues(field: string, values: string[],errorMessage:string) {
     if(!values.includes(field)) throw new BadRequestException(errorMessage)
   }
-  public static isEmail(feild:string,errorMessage:string) {
-    
+  public static isEmail(field:string,errorMessage:string) {
+    //temporary validation might replace with regEx
+    const emailFormat:RegExp=/\@[a-z]*\.[a-z]*/
+    if(!field.length || !field.match(emailFormat)) throw new BadRequestException(errorMessage)
   }
 
 

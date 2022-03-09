@@ -21,7 +21,11 @@ class Validation {
         if (!values.includes(field))
             throw new Errors_1.BadRequestException(errorMessage);
     }
-    static isEmail(feild, errorMessage) {
+    static isEmail(field, errorMessage) {
+        //temporary validation might replace with regEx
+        const emailFormat = /\@[a-z]*\.[a-z]*/;
+        if (!field.length || !field.match(emailFormat))
+            throw new Errors_1.BadRequestException(errorMessage);
     }
 }
 exports.Validation = Validation;

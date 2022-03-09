@@ -4,7 +4,6 @@ import { BadRequestException } from "../utils/Errors";
 class Validations implements Validator {
   public  requiredString(field:string,errorMessage:string):void{
     if (!field || !field.length) throw new BadRequestException(errorMessage);
-    
   }
   
   public  requiredInt(field: number, errorMessage: string):void {
@@ -26,29 +25,32 @@ class Validations implements Validator {
   }
   public  fileSizeValidation(fileSize: number, limit: string, errorMessage: string):void {
     //would be neat if caller could specify file size in format: '10mb' , '100mb'
-    enum validFileFormats {
+    //step 1: make sure the callers given format is valid
+    enum validFileUnits {
       kb = 'kb',
       mb = 'mb',
       gb = 'gb'
     }
-    //make sure the callers given format is valid
-    
-    const conversionsFromKiloBytes = {
+
+    const unitConversionsFromKiloBytes = {
       kb: 1024,
       mb: Math.pow(1024, 2),
       gb: Math.pow(1024, 3)
     }
+
     //by default the file size limit is the size of the provided file 
     let fileSizeLimit: number = fileSize;
-    const sizeFormat = limit.match(/[a-z]/g)?.join("")
-    const sizeValue = limit.match(/[0-9]/g)?.join("")
-    console.log({sizeValue})
-    if (sizeFormat?.length && sizeValue?.length) {
-     fileSizeLimit = parseInt(sizeValue,10) * conversionsFromKiloBytes[sizeFormat];
-    }
+    const limitUnit = limit.match(/[a-z]/g)?.join("")
+    const limitValue = limit.match(/[0-9]/g)?.join("")
 
+    // step 2: if limit unit is not a valid unit type end function and return
+    if (limitUnit !== validFileUnits.kb && limitUnit !== validFileUnits.mb && limitUnit !== validFileUnits.gb) return;
     
-    if (sizeFormat !== validFileFormats.kb && sizeFormat !== validFileFormats.mb && sizeFormat !== validFileFormats.gb) return;
+    //step 3: if RegExp finds a valid limit unit and limit value multiply limit value by according limit unit conversion
+    if (limitUnit?.length && limitValue?.length) {
+      fileSizeLimit = parseInt(limitValue,10) * unitConversionsFromKiloBytes[limitUnit];
+    }
+    //step 4
     if(fileSize > fileSizeLimit) throw new BadRequestException(errorMessage)
   }
   

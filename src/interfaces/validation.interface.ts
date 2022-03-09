@@ -30,7 +30,7 @@ export interface Validator {
   matchesValues(field: string, values: string[], errorMessage: string): void
 
   /**
-   * Validates the provided field matches an email format of ***@***.***' if not throws a BadRequestException Error with a 404 status and the provided error message
+   * Validates the provided field matches an email format of '__@lorem.ipsum' if not throws a BadRequestException Error with a 404 status and the provided error message
      * @param field Field to validate
      * @param errorMessage Error message sent upon failure
      */

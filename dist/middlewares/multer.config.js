@@ -23,7 +23,7 @@ const multerFilter = (req, file, next) => __awaiter(void 0, void 0, void 0, func
         next(new Errors_1.BadRequestException('invalid file type: ' + file.mimetype));
     next(null, true);
 });
-exports.upload = (0, multer_1.default)({ dest: 'uploads', fileFilter: multerFilter });
+exports.upload = (0, multer_1.default)({ dest: '/uploads', fileFilter: multerFilter });
 const uploadFile = (file, food) => {
     const fileStream = node_fs_1.default.createReadStream(file.path);
     const extension = file.mimetype.split('/')[1];

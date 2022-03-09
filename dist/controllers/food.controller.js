@@ -17,6 +17,7 @@ const foodService_1 = require("../service/foodService");
 const controller_config_1 = __importDefault(require("./controller.config"));
 const multer_config_1 = require("../middlewares/multer.config");
 const setImage_1 = require("../helpers/setImage");
+const unlinkLocal_1 = require("../helpers/unlinkLocal");
 class FoodController extends controller_config_1.default {
     constructor() {
         super('/api/v1/foods'); //base route
@@ -44,6 +45,7 @@ class FoodController extends controller_config_1.default {
         });
     }
     createFood(req, res, next) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 //validate and set image on request body
@@ -52,6 +54,7 @@ class FoodController extends controller_config_1.default {
                 yield foodService_1.foodService.createFood(food);
                 //send to s3 after all request validation has been made and item is created 
                 yield (0, multer_config_1.uploadFile)(req.file, food);
+                yield (0, unlinkLocal_1.deleteLocalMulterImages)((_a = req.file) === null || _a === void 0 ? void 0 : _a.path);
                 res.status(201).json({
                     status: 'success',
                     data: food

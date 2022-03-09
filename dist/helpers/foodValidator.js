@@ -20,6 +20,7 @@ const foodValidator = (foodData) => {
     Validation_1.Validation.requiredString(foodData.price.toString(), validationErrors.priceErrorMessage);
     //calories validation
     Validation_1.Validation.requiredInt(foodData.calories, validationErrors.caloriesErrorMessage);
+    Validation_1.Validation.isEmail;
     return foodData;
 };
 exports.foodValidator = foodValidator;

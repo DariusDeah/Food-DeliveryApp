@@ -23,7 +23,7 @@ class Validation {
     }
     static isEmail(field, errorMessage) {
         //temporary validation might replace with regEx
-        const emailFormat = /\@[a-z]*\.[a-z]*/;
+        const emailFormat = /\@[a-z]*\b\.\b[a-z]*\b/;
         if (!field.length || !field.match(emailFormat))
             throw new Errors_1.BadRequestException(errorMessage);
     }

@@ -17,7 +17,7 @@ return
   }
   public static isEmail(field:string,errorMessage:string) {
     //temporary validation might replace with regEx
-    const emailFormat:RegExp=/\@[a-z]*\.[a-z]*/
+    const emailFormat: RegExp = /\@[a-z]*\b\.\b[a-z]*\b/;
     if(!field.length || !field.match(emailFormat)) throw new BadRequestException(errorMessage)
   }
 

@@ -1,6 +1,6 @@
 export interface UserDTO{
   id?: number|string;
-  FullName: string;
+  fullName: string;
   email: string;
   password?: string;
   googleId?: string;

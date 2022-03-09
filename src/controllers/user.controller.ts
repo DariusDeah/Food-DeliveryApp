@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { userService } from "../service/user.services";
 import BaseController from "./controller.config";
-
+import {UserDTO} from '../interfaces/user.interface'
 class UserController extends BaseController {
   constructor() {
     super('api/v1/users')
@@ -9,11 +9,12 @@ class UserController extends BaseController {
     
   }
   async createUser(req:Request,res:Response,next:NextFunction): Promise<void> {
-  try {
-    const user = await userService.createUser(req.body)
+    try {
+    const user:UserDTO = req.body
+    const createdUser = await userService.createUser(user)
     res.status(201).json({
       status: 'success',
-      data: user
+      data: createdUser
     })
   } catch (error) {
     next(error);

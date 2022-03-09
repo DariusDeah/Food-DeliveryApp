@@ -1,9 +1,9 @@
 import { Request } from "express";
 import { BadRequestException } from "../utils/Errors";
+import { Validation } from "./Validation";
 
-export const setImage = (reqBody:Request, imageFile) => {
-  const fileLimit = 1000000;
-  if(imageFile?.size > fileLimit ) throw new BadRequestException('Image file size is too large'+imageFile.size)
+export const setImage = (reqBody: Request, imageFile) => {
+  imageFile.size && Validation.fileSizeValidation(imageFile.size, '10mb', 'Image file size is too large')
   reqBody.image = imageFile.path || reqBody.image;
   return reqBody
 }

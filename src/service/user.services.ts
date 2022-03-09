@@ -1,6 +1,8 @@
+import { UserDTO } from "../interfaces/user.interface";
+
 class UserService{
-  createUser(userData: any) {
-    
+  createUser(userData: UserDTO) {
+    const user =
   }
   
 }

@@ -22,10 +22,11 @@ class UserController extends controller_config_1.default {
     createUser(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const user = yield user_services_1.userService.createUser(req.body);
+                const user = req.body;
+                const createdUser = yield user_services_1.userService.createUser(user);
                 res.status(201).json({
                     status: 'success',
-                    data: user
+                    data: createdUser
                 });
             }
             catch (error) {

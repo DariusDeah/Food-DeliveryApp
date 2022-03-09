@@ -1,10 +1,13 @@
 import db from "../DB.config"
+import { UserDTO } from "../interfaces/user.interface"
 
 
-class User{
-  async create(userData:{first_name: string, last_name: string, email: string, password: string}) {
-    `INSERT INTO users (first_name,last_name,email) 
-    VALUES(${userData.first_name},${userData.last_name},${userData.email},${userData.password})`
+class UserTable{
+  async create(userData:UserDTO) {
+   const sqlQuery =  `INSERT INTO users (fullName,email,password,phone,address,googleId) 
+    VALUES()`
+    const user = await db.query(sqlQuery, userData)
+    userData
   }
   async find(){
     const sql = `SELECT first_name AS FirstName, last_name AS LastName, email AS Email, FROM users `
@@ -12,3 +15,4 @@ class User{
 return users[0]
   }
 }
+export const UserDB = new UserTable()

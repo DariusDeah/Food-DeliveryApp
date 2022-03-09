@@ -16,7 +16,8 @@ const foodValidator = (foodData) => {
     Validation_1.Validation.requiredString(foodData.size, 'size required');
     Validation_1.Validation.matchesValues(foodData.size, [food_interface_1.sizes.small, food_interface_1.sizes.medium, food_interface_1.sizes.large], validationErrors.sizeErrorMessage);
     //price validation
-    Validation_1.Validation.requiredString(foodData.price, validationErrors.priceErrorMessage);
+    //TODO currently price can be accepted as string or number this logic will need to be changed later 
+    Validation_1.Validation.requiredString(foodData.price.toString(), validationErrors.priceErrorMessage);
     //calories validation
     Validation_1.Validation.requiredInt(foodData.calories, validationErrors.caloriesErrorMessage);
     return foodData;

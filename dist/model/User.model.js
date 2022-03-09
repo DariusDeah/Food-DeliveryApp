@@ -12,12 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.UserDB = void 0;
 const DB_config_1 = __importDefault(require("../DB.config"));
-class User {
+class UserTable {
     create(userData) {
         return __awaiter(this, void 0, void 0, function* () {
-            `INSERT INTO users (first_name,last_name,email) 
-    VALUES(${userData.first_name},${userData.last_name},${userData.email},${userData.password})`;
+            const sqlQuery = `INSERT INTO users (fullName,email,password,phone,address,googleId) 
+    VALUES()`;
+            const user = yield DB_config_1.default.query(sqlQuery, userData);
+            userData;
         });
     }
     find() {
@@ -28,3 +31,4 @@ class User {
         });
     }
 }
+exports.UserDB = new UserTable();

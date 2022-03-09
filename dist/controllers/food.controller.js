@@ -19,7 +19,7 @@ const multer_config_1 = require("../middlewares/multer.config");
 const setImage_1 = require("../helpers/setImage");
 class FoodController extends controller_config_1.default {
     constructor() {
-        super('/api/v1/foods'); //baseroute
+        super('/api/v1/foods'); //base route
         this.router.route(this.baseRoute)
             .get(this.getFoods)
             .post(multer_config_1.upload.single('image'), this.createFood);

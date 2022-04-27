@@ -16,8 +16,6 @@ exports.deleteLocalMulterImages = void 0;
 const fs_1 = __importDefault(require("fs"));
 const util_1 = __importDefault(require("util"));
 const deleteFileAsync = util_1.default.promisify(fs_1.default.unlink);
-// const readFileAsync = util.promisify(fs.)
-// deleteFileAsync()
 const deleteLocalMulterImages = (filePath) => __awaiter(void 0, void 0, void 0, function* () {
     yield deleteFileAsync(filePath);
 });

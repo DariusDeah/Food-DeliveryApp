@@ -37,17 +37,17 @@ class Validations implements Validator {
       mb: Math.pow(1024, 2),
       gb: Math.pow(1024, 3)
     }
+ 
 
     //by default the file size limit is the size of the provided file 
     let fileSizeLimit: number = fileSize;
     const limitUnit = limit.match(/[a-z]/g)?.join("")
     const limitValue = limit.match(/[0-9]/g)?.join("")
 
-    // step 2: if limit unit is not a valid unit type end function and return
+    // step 2: if limit unit is not a valid unit type end function and return (choose instant look up over loops and iterations)
     if (limitUnit !== validFileUnits.kb && limitUnit !== validFileUnits.mb && limitUnit !== validFileUnits.gb) return;
-    
     //step 3: if RegExp finds a valid limit unit and limit value multiply limit value by according limit unit conversion
-    if (limitUnit?.length && limitValue?.length) {
+    if (limitUnit.length && limitValue?.length) {
       fileSizeLimit = parseInt(limitValue,10) * unitConversionsFromKiloBytes[limitUnit];
     }
     //step 4

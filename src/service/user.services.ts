@@ -2,7 +2,7 @@ import { UserDTO } from "../interfaces/user.interface";
 
 class UserService{
   createUser(userData: UserDTO) {
-    const user =
+    const user;
   }
   
 }

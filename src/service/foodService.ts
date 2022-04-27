@@ -1,11 +1,11 @@
 import { ParsedQs } from "qs";
 import { foodValidator } from "../helpers/foodValidator";
-import { IFood } from "../interfaces/food.interface";
+import { FoodDTO } from "../interfaces/food.interface";
 import {  FoodDB } from "../model/Food.model";
 import { BadRequestException, NotFoundException } from "../utils/Errors";
 
 class FoodService{
-  async createFood(foodData: IFood) {
+  async createFood(foodData: FoodDTO) {
     const food = foodValidator(foodData);
     if(typeof food === 'string' ) throw new BadRequestException(food);
     const createdFood = await FoodDB.create(food)

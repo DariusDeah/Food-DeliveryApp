@@ -7,6 +7,7 @@ import { BadRequestException, NotFoundException } from "../utils/Errors";
 class FoodService{
   async createFood(foodData: FoodDTO) {
     const food = foodValidator(foodData);
+    // TODO REFACTOR, this code is not clean 
     if(typeof food === 'string' ) throw new BadRequestException(food);
     const createdFood = await FoodDB.create(food)
     return createdFood

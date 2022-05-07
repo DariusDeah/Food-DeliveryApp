@@ -2,28 +2,34 @@ import { Validator } from "../interfaces/validation.interface";
 import { BadRequestException } from "../utils/Errors";
 
 class Validations implements Validator {
-  public  requiredString(field:string,errorMessage:string):void{
+  public  requiredString(field:string,errorMessage:string):Validations{
     if (!field || !field.length) throw new BadRequestException(errorMessage);
+    return this
   }
   
-  public  requiredInt(field: number, errorMessage: string):void {
-  if(!field || field <= 0 ) throw new BadRequestException(errorMessage)
+  public  requiredInt(field: number, errorMessage: string):Validations {
+    if (!field || field <= 0) throw new BadRequestException(errorMessage)
+    return this
   }
-  public  matchesValue(field:string,value:string,errorMessage:string):void {
-    if(field !== value) throw new BadRequestException(errorMessage)
+  public  matchesValue(field:string,value:string,errorMessage:string):Validations {
+    if (field !== value) throw new BadRequestException(errorMessage)
+    return this
   }
-  public  matchesValues(field: string, values: string[],errorMessage:string):void {
-    if(!values.includes(field)) throw new BadRequestException(errorMessage)
+  public  matchesValues(field: string, values: string[],errorMessage:string):Validations {
+    if (!values.includes(field)) throw new BadRequestException(errorMessage)
+    return this
   }
-  public  isEmail(field:string,errorMessage:string):void {
+  public  isEmail(field:string,errorMessage:string):Validations {
     const emailFormat: RegExp = /\@[a-z]*\b\.\b[a-z]*\b/;
 
-    if(!field.length || !field.match(emailFormat)) throw new BadRequestException(errorMessage)
+    if (!field.length || !field.match(emailFormat)) throw new BadRequestException(errorMessage)
+    return this 
   }
-  public  validateLength(field: string, requiredLength: number, errorMessage: string):void {
-  if(field.length < requiredLength) throw new BadRequestException(errorMessage)
+  public  validateLength(field: string, requiredLength: number, errorMessage: string):Validations {
+    if (field.length < requiredLength) throw new BadRequestException(errorMessage)
+    return this 
   }
-  public  fileSizeValidation(fileSize: number, limit: string, errorMessage: string):void {
+  public  fileSizeValidation(fileSize: number, limit: string, errorMessage: string):Validations {
     //would be neat if caller could specify file size in format: '10mb' , '100mb'
     //step 1: make sure the callers given format is valid
     enum validFileUnits {
@@ -51,7 +57,8 @@ class Validations implements Validator {
       fileSizeLimit = parseInt(limitValue,10) * unitConversionsFromKiloBytes[limitUnit];
     }
     //step 4
-    if(fileSize > fileSizeLimit) throw new BadRequestException(errorMessage)
+    if (fileSize > fileSizeLimit) throw new BadRequestException(errorMessage)
+    return this
   }
   
 

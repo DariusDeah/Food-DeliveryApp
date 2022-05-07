@@ -6,27 +6,33 @@ class Validations {
     requiredString(field, errorMessage) {
         if (!field || !field.length)
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
     requiredInt(field, errorMessage) {
         if (!field || field <= 0)
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
     matchesValue(field, value, errorMessage) {
         if (field !== value)
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
     matchesValues(field, values, errorMessage) {
         if (!values.includes(field))
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
     isEmail(field, errorMessage) {
         const emailFormat = /\@[a-z]*\b\.\b[a-z]*\b/;
         if (!field.length || !field.match(emailFormat))
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
     validateLength(field, requiredLength, errorMessage) {
         if (field.length < requiredLength)
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
     fileSizeValidation(fileSize, limit, errorMessage) {
         var _a, _b;
@@ -57,6 +63,7 @@ class Validations {
         //step 4
         if (fileSize > fileSizeLimit)
             throw new Errors_1.BadRequestException(errorMessage);
+        return this;
     }
 }
 exports.Validation = new Validations();

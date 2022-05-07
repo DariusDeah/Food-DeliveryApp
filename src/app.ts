@@ -11,14 +11,12 @@ import ExpressMongoSanitize from 'express-mongo-sanitize';
   }
    private useMiddleware() {
     const app = this.app;
-
      app.use(helmet())
      app.use(ExpressMongoSanitize())
      app.use(express.json({ limit: '20mb' }))
   }
    private useRoutes() {
      const app = this.app;
-     
     app.use('/', foodController.controllerRouter)
     ErrorHandlers.error(this.app)
     ErrorHandlers.routerError(this.app);

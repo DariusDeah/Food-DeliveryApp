@@ -51,12 +51,12 @@ class FoodController extends controller_config_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 //validate and set image on request body
-                (0, setImage_1.setImage)(req.body, req.file);
+                req.file && (0, setImage_1.setImage)(req.body, req.file);
                 const food = req.body;
                 yield foodService_1.foodService.createFood(food);
                 //send to s3 after all request validation has been made and item is created
-                yield (0, multer_config_1.uploadFile)(req.file, food);
-                yield (0, unlinkLocal_1.deleteLocalMulterImages)((_a = req.file) === null || _a === void 0 ? void 0 : _a.path);
+                req.file && (yield (0, multer_config_1.uploadFile)(req.file, food));
+                req.file && (yield (0, unlinkLocal_1.deleteLocalMulterImages)((_a = req.file) === null || _a === void 0 ? void 0 : _a.path));
                 res.status(201).json({
                     status: "success",
                     data: food,

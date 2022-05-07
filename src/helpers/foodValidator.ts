@@ -10,10 +10,10 @@ export const foodValidator = (foodData: FoodDTO) => {
   };
 
   //name validation
-  Validation.requiredString(foodData.name, validationErrors.nameErrorMessage);
+  Validation.requiredString(foodData.name, validationErrors.nameErrorMessage)
   //size validation
-  Validation.requiredString(foodData.size, "size required");
-  Validation.matchesValues(
+  Validation.requiredString(foodData.size, "size required")
+  .matchesValues(
     foodData.size,
     [sizes.small, sizes.medium, sizes.large],
     validationErrors.sizeErrorMessage

@@ -16,7 +16,7 @@ const user_services_1 = require("../service/user.services");
 const controller_config_1 = __importDefault(require("./controller.config"));
 class UserController extends controller_config_1.default {
     constructor() {
-        super('api/v1/users');
+        super("api/v1/users");
         this.router.route(this.baseRoute).post(this.createUser);
     }
     createUser(req, res, next) {
@@ -25,8 +25,8 @@ class UserController extends controller_config_1.default {
                 const user = req.body;
                 const createdUser = yield user_services_1.userService.createUser(user);
                 res.status(201).json({
-                    status: 'success',
-                    data: createdUser
+                    status: "success",
+                    data: createdUser,
                 });
             }
             catch (error) {

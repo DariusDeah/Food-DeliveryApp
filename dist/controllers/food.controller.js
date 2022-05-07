@@ -20,23 +20,22 @@ const setImage_1 = require("../helpers/setImage");
 const unlinkLocal_1 = require("../helpers/unlinkLocal");
 class FoodController extends controller_config_1.default {
     constructor() {
-        super('/api/v1/foods'); //base route
-        this.router.route(this.baseRoute)
+        super("/api/v1/foods"); //base route
+        this.router
+            .route(this.baseRoute)
             .get(this.getFoods)
-            .post(multer_config_1.upload.single('image'), this.createFood);
-        this.router.route(this.baseRoute + '/:id')
-            .get(this.getById);
-        this.router.route(this.baseRoute + '/stats')
-            .get(this.getStats);
+            .post(multer_config_1.upload.single("image"), this.createFood);
+        this.router.route(this.baseRoute + "/:id").get(this.getById);
+        this.router.route(this.baseRoute + "/stats").get(this.getStats);
     }
     getFoods(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const foods = yield foodService_1.foodService.getFood(req.query);
                 res.status(200).json({
-                    status: 'success',
+                    status: "success",
                     results: foods.length,
-                    data: foods
+                    data: foods,
                 });
             }
             catch (error) {
@@ -52,12 +51,12 @@ class FoodController extends controller_config_1.default {
                 (0, setImage_1.setImage)(req.body, req.file);
                 const food = req.body;
                 yield foodService_1.foodService.createFood(food);
-                //send to s3 after all request validation has been made and item is created 
+                //send to s3 after all request validation has been made and item is created
                 yield (0, multer_config_1.uploadFile)(req.file, food);
                 yield (0, unlinkLocal_1.deleteLocalMulterImages)((_a = req.file) === null || _a === void 0 ? void 0 : _a.path);
                 res.status(201).json({
-                    status: 'success',
-                    data: food
+                    status: "success",
+                    data: food,
                 });
             }
             catch (error) {
@@ -70,8 +69,8 @@ class FoodController extends controller_config_1.default {
             try {
                 const food = yield foodService_1.foodService.getById(req.params.id);
                 res.status(200).json({
-                    status: 'success',
-                    data: food
+                    status: "success",
+                    data: food,
                 });
             }
             catch (error) {

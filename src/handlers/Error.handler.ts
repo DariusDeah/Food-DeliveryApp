@@ -3,7 +3,7 @@ import express from "express";
 import { ApiError } from "../utils/Errors";
 
 class ErrorHandler {
-  routerError(app: express.Application) {
+  routerError(app: express.Application): void {
     app.all('*', (req: Request, res: Response): void => {
       res.status(404).json({
         error: {
@@ -12,9 +12,10 @@ class ErrorHandler {
         }
       })
     }
-  }
+  )
+}
 
-  error(app: express.Application) {
+  error(app: express.Application): void {
     app.use(
       (
         err: ApiError,

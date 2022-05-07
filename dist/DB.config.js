@@ -25,21 +25,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv = __importStar(require("dotenv"));
 const mysql2_1 = __importDefault(require("mysql2"));
 dotenv.config({ path: './.env' });
-// export class DbcConfig {
-//   db
-//   constructor() {
-//     this.db = this.DbConnect
-//   }
-//   private DbConnect() { //TODO: add return type
-//    const dbConnection =  mysql.createPool({
-//       user: process.env.user as string,
-//       host: process.env.host as string,
-//       password: process.env.password as string,
-//       database: process.env.database as string
-//    })
-//     return dbConnection.promise()
-//   }
-// }
 const db = mysql2_1.default.createPool({
     user: process.env.user,
     host: process.env.host,

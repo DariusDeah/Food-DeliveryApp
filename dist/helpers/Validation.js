@@ -47,11 +47,11 @@ class Validations {
         let fileSizeLimit = fileSize;
         const limitUnit = (_a = limit.match(/[a-z]/g)) === null || _a === void 0 ? void 0 : _a.join("");
         const limitValue = (_b = limit.match(/[0-9]/g)) === null || _b === void 0 ? void 0 : _b.join("");
-        // step 2: if limit unit is not a valid unit type end function and return
+        // step 2: if limit unit is not a valid unit type end function and return (choose instant look up over loops and iterations)
         if (limitUnit !== validFileUnits.kb && limitUnit !== validFileUnits.mb && limitUnit !== validFileUnits.gb)
             return;
         //step 3: if RegExp finds a valid limit unit and limit value multiply limit value by according limit unit conversion
-        if ((limitUnit === null || limitUnit === void 0 ? void 0 : limitUnit.length) && (limitValue === null || limitValue === void 0 ? void 0 : limitValue.length)) {
+        if (limitUnit.length && (limitValue === null || limitValue === void 0 ? void 0 : limitValue.length)) {
             fileSizeLimit = parseInt(limitValue, 10) * unitConversionsFromKiloBytes[limitUnit];
         }
         //step 4

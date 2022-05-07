@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Forbidden = exports.UnAuthorizedException = exports.BadRequestException = exports.NotFoundException = void 0;
+exports.ServerError = exports.Forbidden = exports.UnAuthorizedException = exports.BadRequestException = exports.NotFoundException = void 0;
 class NotFoundException extends Error {
     constructor(message = "Not Found") {
         super(message);
@@ -29,3 +29,10 @@ class Forbidden extends Error {
     }
 }
 exports.Forbidden = Forbidden;
+class ServerError extends Error {
+    constructor(message = "Server Error") {
+        super(message);
+        this.status = 500;
+    }
+}
+exports.ServerError = ServerError;

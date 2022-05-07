@@ -28,6 +28,9 @@ class FoodController extends controller_config_1.default {
         this.router.route(this.baseRoute + "/:id").get(this.getById);
         this.router.route(this.baseRoute + "/stats").get(this.getStats);
     }
+    get controllerRouter() {
+        return this.router;
+    }
     getFoods(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {

@@ -3,7 +3,6 @@ import helmet from 'helmet';
 import { foodController } from './controllers/food.controller';
 import { ErrorHandlers } from './handlers/Error.handler';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
-import multer from 'multer';
  class App{
    app: express.Application = express();
    constructor() {
@@ -20,7 +19,7 @@ import multer from 'multer';
    private useRoutes() {
      const app = this.app;
      
-    app.use('/', foodController.router)
+    app.use('/', foodController.controllerRouter)
     ErrorHandlers.error(this.app)
     ErrorHandlers.routerError(this.app);
   }

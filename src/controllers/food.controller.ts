@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { foodService } from "../service/foodService";
 import { foodMaker } from "../utils/data";
 import BaseController from "./controller.config";
@@ -18,6 +18,9 @@ class FoodController extends BaseController {
     this.router.route(this.baseRoute + "/:id").get(this.getById);
 
     this.router.route(this.baseRoute + "/stats").get(this.getStats);
+  }
+  get controllerRouter(): Router {
+    return this.router;
   }
 
   private async getFoods(

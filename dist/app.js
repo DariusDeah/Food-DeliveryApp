@@ -23,7 +23,7 @@ class App {
     }
     useRoutes() {
         const app = this.app;
-        app.use('/', food_controller_1.foodController.router);
+        app.use('/', food_controller_1.foodController.controllerRouter);
         Error_handler_1.ErrorHandlers.error(this.app);
         Error_handler_1.ErrorHandlers.routerError(this.app);
     }

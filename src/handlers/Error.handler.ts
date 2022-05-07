@@ -4,16 +4,15 @@ import { ApiError } from "../utils/Errors";
 
 class ErrorHandler {
   routerError(app: express.Application): void {
-    app.all('*', (req: Request, res: Response): void => {
+    app.all("*", (req: Request, res: Response): void => {
       res.status(404).json({
         error: {
-          status: 'Fail',
-          message: `route not found at ${req.originalUrl}`
-        }
-      })
-    }
-  )
-}
+          status: "Fail",
+          message: `route not found at ${req.originalUrl}`,
+        },
+      });
+    });
+  }
 
   error(app: express.Application): void {
     app.use(

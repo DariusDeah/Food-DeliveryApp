@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import express from "express";
-import { ApiError } from "../utils/Errors";
+import { ApiError } from "../utils/Errors.util";
 
 class ErrorHandler {
   routerError(app: express.Application): void {

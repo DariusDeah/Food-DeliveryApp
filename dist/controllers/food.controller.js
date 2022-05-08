@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodController = void 0;
-const foodService_1 = require("../service/foodService");
+const food_service_1 = require("../service/food.service");
 const controller_config_1 = __importDefault(require("./controller.config"));
 const multer_config_1 = require("../middlewares/multer.config");
 const setImage_1 = require("../helpers/setImage");
-const unlinkLocal_1 = require("../helpers/unlinkLocal");
+const FoodS3Upload_util_1 = require("../utils/FoodS3Upload.util");
 class FoodController extends controller_config_1.default {
     constructor() {
         super("/api/v1/foods"); //base route
@@ -34,7 +34,7 @@ class FoodController extends controller_config_1.default {
     getFoods(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const foods = yield foodService_1.foodService.getFood(req.query);
+                const foods = yield food_service_1.foodService.getFood(req.query);
                 res.status(200).json({
                     status: "success",
                     results: foods.length,
@@ -47,16 +47,14 @@ class FoodController extends controller_config_1.default {
         });
     }
     createFood(req, res, next) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 //validate and set image on request body
-                req.file && (0, setImage_1.setImage)(req.body, req.file);
                 const food = req.body;
-                yield foodService_1.foodService.createFood(food);
+                (0, setImage_1.setImage)(req.body, req.file);
+                yield food_service_1.foodService.createFood(food);
                 //send to s3 after all request validation has been made and item is created
-                req.file && (yield (0, multer_config_1.uploadFile)(req.file, food));
-                req.file && (yield (0, unlinkLocal_1.deleteLocalMulterImages)((_a = req.file) === null || _a === void 0 ? void 0 : _a.path));
+                (0, FoodS3Upload_util_1.UploadToS3)("food", req, food);
                 res.status(201).json({
                     status: "success",
                     data: food,
@@ -70,7 +68,7 @@ class FoodController extends controller_config_1.default {
     getById(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const food = yield foodService_1.foodService.getById(req.params.id);
+                const food = yield food_service_1.foodService.getById(req.params.id);
                 res.status(200).json({
                     status: "success",
                     data: food,

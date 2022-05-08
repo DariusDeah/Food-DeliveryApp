@@ -1,5 +1,7 @@
-export interface UserDTO{
-  id?: number|string;
+import { baseItem } from "./baseItem.interface";
+
+export interface UserDTO extends baseItem{
+  id: number;
   fullName: string;
   email: string;
   password?: string;

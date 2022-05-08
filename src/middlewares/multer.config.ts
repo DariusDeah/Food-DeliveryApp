@@ -1,9 +1,10 @@
 import multer from 'multer';
-import { BadRequestException } from '../utils/Errors';
+import { BadRequestException } from '../utils/Errors.util';
 import { json, NextFunction, Request, Response } from 'express';
 import fs from 'node:fs';
 import { UberEats_Clone_Folder } from '../aws/s3.congifg'
 import { FoodDTO } from '../interfaces/food.interface';
+import { baseItem } from '../interfaces/baseItem.interface';
 
 
 const multerFilter = async (req:Request,file,next) => {
@@ -13,13 +14,14 @@ const multerFilter = async (req:Request,file,next) => {
 }
 export const upload = multer({ dest: '/uploads',fileFilter:multerFilter })
 
-export const uploadFile = (file,food:FoodDTO) => {
+
+export const uploadFile = (file,item:baseItem,S3Location:string) => {
   const fileStream = fs.createReadStream(file.path)
   const extension = file.mimetype.split('/')[1]
-  const Key = `${food.size}-${food.name}-${Date.now()}.${extension}`
+  const Key = `${item.name}-${Date.now()}.${extension}`
 
   const uploadParams = {
-    Bucket: process.env.S3_Name,
+    Bucket: S3Location,
     Body: fileStream,
     Key
     }

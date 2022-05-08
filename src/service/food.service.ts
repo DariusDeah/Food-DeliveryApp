@@ -2,7 +2,7 @@ import { ParsedQs } from "qs";
 import { foodValidator } from "../helpers/foodValidator";
 import { FoodDTO } from "../interfaces/food.interface";
 import {  FoodDB } from "../model/Food.model";
-import { BadRequestException, NotFoundException } from "../utils/Errors";
+import { BadRequestException, NotFoundException } from "../utils/Errors.util";
 
 class FoodService{
   async createFood(foodData: FoodDTO) {

@@ -1,5 +1,5 @@
 import { Validator } from "../interfaces/validation.interface";
-import { BadRequestException } from "../utils/Errors";
+import { BadRequestException } from "../utils/Errors.util";
 
 class Validations implements Validator {
   public  requiredString(field:string,errorMessage:string):Validations{

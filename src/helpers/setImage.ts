@@ -1,5 +1,5 @@
 import { Request } from "express";
-import { BadRequestException } from "../utils/Errors";
+import { BadRequestException } from "../utils/Errors.util";
 import { Validation } from "./Validation";
 
 export const setImage = (reqBody: Request, imageFile) => {

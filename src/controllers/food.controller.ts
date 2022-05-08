@@ -1,10 +1,10 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { foodService } from "../service/foodService";
+import { foodService } from "../service/food.service";
 import BaseController from "./controller.config";
 import { upload, uploadFile } from "../middlewares/multer.config";
 import { setImage } from "../helpers/setImage";
 import { FoodDTO } from "../interfaces/food.interface";
-import { deleteLocalMulterImages } from "../helpers/unlinkLocal";
+import { Food_S3_Upload, UploadToS3 } from "../utils/FoodS3Upload.util";
 class FoodController extends BaseController {
   constructor() {
     super("/api/v1/foods"); //base route
@@ -45,13 +45,11 @@ class FoodController extends BaseController {
   ): Promise<void> {
     try {
       //validate and set image on request body
-      
-      req.file && setImage(req.body, req.file);
       const food: FoodDTO = req.body;
+      setImage(req.body, req.file);
       await foodService.createFood(food);
       //send to s3 after all request validation has been made and item is created
-      req.file && await uploadFile(req.file, food);
-      req.file && await deleteLocalMulterImages(req.file?.path);
+      UploadToS3("food", req, food);
       res.status(201).json({
         status: "success",
         data: food,

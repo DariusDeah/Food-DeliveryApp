@@ -14,22 +14,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.uploadFile = exports.upload = void 0;
 const multer_1 = __importDefault(require("multer"));
-const Errors_1 = require("../utils/Errors");
+const Errors_util_1 = require("../utils/Errors.util");
 const node_fs_1 = __importDefault(require("node:fs"));
 const s3_congifg_1 = require("../aws/s3.congifg");
 const multerFilter = (req, file, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log({ file });
     if (!file.mimetype.startsWith('image'))
-        next(new Errors_1.BadRequestException('invalid file type: ' + file.mimetype));
+        next(new Errors_util_1.BadRequestException('invalid file type: ' + file.mimetype));
     next(null, true);
 });
 exports.upload = (0, multer_1.default)({ dest: '/uploads', fileFilter: multerFilter });
-const uploadFile = (file, food) => {
+const uploadFile = (file, item, S3Location) => {
     const fileStream = node_fs_1.default.createReadStream(file.path);
     const extension = file.mimetype.split('/')[1];
-    const Key = `${food.size}-${food.name}-${Date.now()}.${extension}`;
+    const Key = `${item.name}-${Date.now()}.${extension}`;
     const uploadParams = {
-        Bucket: process.env.S3_Name,
+        Bucket: S3Location,
         Body: fileStream,
         Key
     };

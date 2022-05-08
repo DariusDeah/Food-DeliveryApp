@@ -1,6 +1,8 @@
-export interface FoodDTO{
+import { baseItem } from "./baseItem.interface";
+
+export interface FoodDTO extends baseItem{
    length: any;
-   id?: number;
+   id: number;
    name: string,
    price: number|string,
    size:sizes ,

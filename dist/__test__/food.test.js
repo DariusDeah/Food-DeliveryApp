@@ -61,6 +61,7 @@ class FoodsTest {
                     size: food_interface_1.sizes.small,
                     calories: 44,
                     image: "",
+                    length: undefined
                 };
                 it('should return 201', () => __awaiter(this, void 0, void 0, function* () {
                     yield (0, supertest_1.default)(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201);

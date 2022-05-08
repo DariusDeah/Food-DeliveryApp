@@ -3,7 +3,6 @@ import { BadRequestException } from '../utils/Errors.util';
 import { json, NextFunction, Request, Response } from 'express';
 import fs from 'node:fs';
 import { UberEats_Clone_Folder } from '../aws/s3.congifg'
-import { FoodDTO } from '../interfaces/food.interface';
 import { baseItem } from '../interfaces/baseItem.interface';
 
 

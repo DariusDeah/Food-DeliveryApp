@@ -49,14 +49,11 @@ class FoodController extends controller_config_1.default {
     createFood(req, res, next) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                //validate and set image on request body
-                if (req.file) {
-                    (0, setImage_1.setImage)(req.body, req.file);
-                }
                 const food = req.body;
                 yield food_service_1.foodService.createFood(food);
-                //send to s3 after all request validation has been made and item is created
-                req.file && (0, FoodS3Upload_util_1.UploadToS3)("food", req, food);
+                if (req.body.image) {
+                    (0, FoodS3Upload_util_1.UploadToS3)("food", req, food);
+                }
                 res.status(201).json({
                     status: "success",
                     data: food,

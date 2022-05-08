@@ -44,14 +44,11 @@ class FoodController extends BaseController {
     next: NextFunction
   ): Promise<void> {
     try {
-      //validate and set image on request body
-      if (req.file) {
-        setImage(req.body, req.file);
-}
       const food: FoodDTO = req.body;
       await foodService.createFood(food);
-      //send to s3 after all request validation has been made and item is created
-      req.file && UploadToS3("food", req, food);
+      if (req.body.image) {
+        UploadToS3("food", req, food)
+      }
       res.status(201).json({
         status: "success",
         data: food,

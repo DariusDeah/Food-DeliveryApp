@@ -6,7 +6,7 @@ class Server {
         this.StartServer();
     }
     StartServer() {
-        const PORT = parseInt(process.env.PORT) || 3000;
+        const PORT = parseInt(process.env["PORT"]) || 3000;
         app_1.app.app.listen(PORT, () => {
             console.log(`SERVER running on http://localhost:${PORT} `);
         });

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { foodService } from "../Users/food.service";
+import { foodService } from "./food.service";
 import BaseController from "../controllers/controller.config";
 import { upload } from "../middlewares/multer.config";
 import { setImage } from "../middlewares/setImage";

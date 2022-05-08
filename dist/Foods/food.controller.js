@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodController = void 0;
-const food_service_1 = require("../Users/food.service");
+const food_service_1 = require("./food.service");
 const controller_config_1 = __importDefault(require("../controllers/controller.config"));
 const multer_config_1 = require("../middlewares/multer.config");
 const setImage_1 = require("../middlewares/setImage");

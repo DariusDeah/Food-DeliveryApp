@@ -1,4 +1,4 @@
-import { UserDTO } from "../interfaces/user.interface";
+import { UserDTO } from "./user.interface";
 
 class UserService{
   createUser(userData: UserDTO) {

@@ -1,6 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
-import { foodController } from './controllers/food.controller';
+import { foodController } from './Foods/food.controller';
 import { ErrorHandlers } from './handlers/Error.handler';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
  class App{

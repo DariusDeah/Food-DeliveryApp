@@ -12,27 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const user_services_1 = require("../Users/user.services");
-const controller_config_1 = __importDefault(require("./controller.config"));
-class UserController extends controller_config_1.default {
-    constructor() {
-        super("api/v1/users");
-        this.router.route(this.baseRoute).post(this.createUser);
-    }
-    createUser(req, res, next) {
+exports.UserDB = void 0;
+const DB_config_1 = __importDefault(require("../DB.config"));
+class UserTable {
+    create(userData) {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const user = req.body;
-                const createdUser = yield user_services_1.userService.createUser(user);
-                res.status(201).json({
-                    status: "success",
-                    data: createdUser,
-                });
-            }
-            catch (error) {
-                next(error);
-            }
+            const sqlQuery = `INSERT INTO users (fullName,email,password,phone,address,googleId) 
+    VALUES()`;
+            const user = yield DB_config_1.default.query(sqlQuery, userData);
+            userData;
+        });
+    }
+    find() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sql = `SELECT first_name AS FirstName, last_name AS LastName, email AS Email, FROM users `;
+            const users = yield DB_config_1.default.query(sql);
+            return users[0];
         });
     }
 }
-const userController = new UserController();
+exports.UserDB = new UserTable();

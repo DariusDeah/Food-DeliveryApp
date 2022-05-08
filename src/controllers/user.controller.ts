@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { userService } from "../service/user.services";
+import { userService } from "../Users/user.services";
 import BaseController from "./controller.config";
-import { UserDTO } from "../interfaces/user.interface";
+import { UserDTO } from "../Users/user.interface";
 class UserController extends BaseController {
   constructor() {
     super("api/v1/users");

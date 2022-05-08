@@ -1,5 +1,5 @@
-import { FoodDTO, sizes } from "../interfaces/food.interface";
-import { Validation } from "./Validation";
+import { FoodDTO, sizes } from "./food.interface";
+import { Validation } from "../helpers/Validation";
 
 export const foodValidator = (foodData: FoodDTO) => {
   const validationErrors = {

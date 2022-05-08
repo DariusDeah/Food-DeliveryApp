@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response, Router } from "express";
-import { foodService } from "../service/food.service";
-import BaseController from "./controller.config";
+import { foodService } from "../Users/food.service";
+import BaseController from "../controllers/controller.config";
 import { upload } from "../middlewares/multer.config";
 import { setImage } from "../middlewares/setImage";
-import { FoodDTO } from "../interfaces/food.interface";
+import { FoodDTO } from "./food.interface";
 import { UploadToS3 } from "../utils/FoodS3Upload.util";
 class FoodController extends BaseController {
   constructor() {

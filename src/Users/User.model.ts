@@ -1,5 +1,5 @@
 import db from "../DB.config"
-import { UserDTO } from "../interfaces/user.interface"
+import { UserDTO } from "./user.interface"
 
 
 class UserTable{

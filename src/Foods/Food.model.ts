@@ -1,5 +1,5 @@
 import db from "../DB.config"
-import { FoodDTO } from "../interfaces/food.interface";
+import { FoodDTO } from "./food.interface";
  class FoodTable {
    async create(food: FoodDTO):Promise<FoodDTO> {
      console.log(food.image)

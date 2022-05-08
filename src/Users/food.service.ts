@@ -1,7 +1,7 @@
 import { ParsedQs } from "qs";
-import { foodValidator } from "../helpers/foodValidator";
-import { FoodDTO } from "../interfaces/food.interface";
-import {  FoodDB } from "../model/Food.model";
+import { foodValidator } from "../Foods/food.validator";
+import { FoodDTO } from "../Foods/food.interface";
+import {  FoodDB } from "../Foods/Food.model";
 import { BadRequestException, NotFoundException } from "../utils/Errors.util";
 
 class FoodService{

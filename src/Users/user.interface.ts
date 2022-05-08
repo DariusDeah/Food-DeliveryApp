@@ -1,4 +1,4 @@
-import { baseItem } from "./baseItem.interface";
+import { baseItem } from "../interfaces/baseItem.interface";
 
 export interface UserDTO extends baseItem{
   id: number;

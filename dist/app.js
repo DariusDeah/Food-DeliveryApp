@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 const express_1 = __importDefault(require("express"));
 const helmet_1 = __importDefault(require("helmet"));
-const food_controller_1 = require("./controllers/food.controller");
+const food_controller_1 = require("./Foods/food.controller");
 const Error_handler_1 = require("./handlers/Error.handler");
 const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
 class App {

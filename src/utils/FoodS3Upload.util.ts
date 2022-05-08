@@ -1,7 +1,7 @@
 import { deleteLocalMulterImages } from "../helpers/unlinkLocal";
 import { uploadFile } from "../middlewares/multer.config";
 import { Request } from "express";
-import { FoodDTO } from "../interfaces/food.interface";
+import { FoodDTO } from "../Foods/food.interface";
 import { baseItem } from "../interfaces/baseItem.interface";
 //implement strategy pattern for photo uploads
 const Food_S3_Upload = async (req: Request, food: FoodDTO): Promise<void> => {

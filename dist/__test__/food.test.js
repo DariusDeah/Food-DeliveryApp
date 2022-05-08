@@ -55,6 +55,7 @@ class FoodsTest {
         describe('POST /foods', () => {
             describe('if post request is successful', () => {
                 const reqBody = {
+                    id: Math.random() * 1000,
                     name: "endpointTest",
                     price: "1234",
                     size: food_interface_1.sizes.small,
@@ -68,7 +69,7 @@ class FoodsTest {
         });
         describe('If POST request is unsuccessful', () => {
             const reqBody = {
-                name: "dwfw",
+                name: "test",
                 price: "12",
                 size: "",
                 calories: 44,

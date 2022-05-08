@@ -16,7 +16,7 @@ exports.foodController = void 0;
 const food_service_1 = require("../service/food.service");
 const controller_config_1 = __importDefault(require("./controller.config"));
 const multer_config_1 = require("../middlewares/multer.config");
-const setImage_1 = require("../helpers/setImage");
+const setImage_1 = require("../middlewares/setImage");
 const FoodS3Upload_util_1 = require("../utils/FoodS3Upload.util");
 class FoodController extends controller_config_1.default {
     constructor() {
@@ -24,7 +24,7 @@ class FoodController extends controller_config_1.default {
         this.router
             .route(this.baseRoute)
             .get(this.getFoods)
-            .post(multer_config_1.upload.single("image"), this.createFood);
+            .post(multer_config_1.upload.single("image"), setImage_1.setImage, this.createFood);
         this.router.route(this.baseRoute + "/:id").get(this.getById);
         this.router.route(this.baseRoute + "/stats").get(this.getStats);
     }
@@ -50,11 +50,13 @@ class FoodController extends controller_config_1.default {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 //validate and set image on request body
+                if (req.file) {
+                    (0, setImage_1.setImage)(req.body, req.file);
+                }
                 const food = req.body;
-                (0, setImage_1.setImage)(req.body, req.file);
                 yield food_service_1.foodService.createFood(food);
                 //send to s3 after all request validation has been made and item is created
-                (0, FoodS3Upload_util_1.UploadToS3)("food", req, food);
+                req.file && (0, FoodS3Upload_util_1.UploadToS3)("food", req, food);
                 res.status(201).json({
                     status: "success",
                     data: food,

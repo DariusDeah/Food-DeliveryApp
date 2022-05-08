@@ -43,13 +43,15 @@ class FoodsTest {
   private postRequest() {
     describe('POST /foods', () => {
       describe('if post request is successful', () => {
-        const reqBody:FoodDTO = {
-              name: "endpointTest",
-              price: "1234",
-              size: sizes.small,
-              calories: 44,
-              image: "",
-              }
+        const reqBody: FoodDTO = {
+          id: Math.random() * 1000,
+          name: "endpointTest",
+          price: "1234",
+          size: sizes.small,
+          calories: 44,
+          image: "",
+          
+        }
         it('should return 201', async () => {
           await supertest(this.ApiServer).post(this.baseRoute).send(reqBody).expect(201)
         })
@@ -58,7 +60,7 @@ class FoodsTest {
     })
     describe('If POST request is unsuccessful', () => {
       const reqBody = {
-             name: "dwfw",
+             name: "test",
               price: "12",
               size: "",
               calories: 44,

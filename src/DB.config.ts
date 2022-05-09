@@ -3,9 +3,9 @@ import mysql from "mysql2";
 dotenv.config({ path: "./.env" });
 
 const db = mysql.createPool({
-  user: process.env["user "] as string,
-  host: process.env["host"] as string,
-  password: process.env["password"] as string,
-  database: process.env["database"] as string,
+  user: process.env.user  ,
+  host: process.env.host ,
+  password: process.env.password ,
+  database: process.env.database ,
 });
 export default db.promise();

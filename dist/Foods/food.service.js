@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.foodService = void 0;
 const food_validator_1 = require("./food.validator");
-const Food_model_1 = require("./Food.model");
+const food_model_1 = require("./food.model");
 const Errors_util_1 = require("../utils/Errors.util");
 class FoodService {
     createFood(foodData) {
@@ -20,13 +20,13 @@ class FoodService {
             // TODO REFACTOR, this code is not clean 
             if (typeof food === 'string')
                 throw new Errors_util_1.BadRequestException(food);
-            const createdFood = yield Food_model_1.FoodDB.create(food);
+            const createdFood = yield food_model_1.FoodDB.create(food);
             return createdFood;
         });
     }
     getFood(query) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = yield Food_model_1.FoodDB.find(query);
+            const food = yield food_model_1.FoodDB.find(query);
             if (!food.length)
                 throw new Errors_util_1.NotFoundException();
             return food;
@@ -34,7 +34,7 @@ class FoodService {
     }
     getById(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const food = yield Food_model_1.FoodDB.findById(id);
+            const food = yield food_model_1.FoodDB.findById(id);
             if (!food.length)
                 throw new Errors_util_1.NotFoundException();
             return food;

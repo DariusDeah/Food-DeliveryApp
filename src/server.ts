@@ -1,16 +1,22 @@
-import  { app } from './app'
+import { app } from "./app";
 
-class Server{
+class Server {
+  private static instance: Server;
   constructor() {
-    this.StartServer()
+    this.StartServer();
   }
-  StartServer():void {
-    const PORT = parseInt(process.env["PORT"] as string) || 3000
-    app.app.listen(PORT, () => {
-      console.log(`SERVER running on http://localhost:${PORT} 🚀🌑`)
-    })
+  public static getInstance(): Server {
+    if (this.instance == null) {
+      return new Server();
+    }
+    return this.instance;
   }
-  
+  StartServer(): void {
+    const PORT = parseInt(process.env["PORT"] as string) || 3000;
+    app.listen(PORT, () => {
+      console.log(`SERVER running on http://localhost:${PORT} 🚀🌑`);
+    });
+  }
 }
 
-const server = new Server()
+const server: Server =   Server.getInstance()

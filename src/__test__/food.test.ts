@@ -7,7 +7,7 @@ class FoodsTest {
   //taking the base route for the api endpoint from the controller to make testing more dynamic
   private baseRoute = foodController.baseRoute
   constructor() {
-    this.ApiServer = app.app
+    this.ApiServer = app
     this.RouteIdTest();
     this.validRoute();
     this.validRoute();

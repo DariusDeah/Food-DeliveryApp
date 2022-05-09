@@ -5,11 +5,17 @@ class Server {
     constructor() {
         this.StartServer();
     }
+    static getInstance() {
+        if (this.instance == null) {
+            return new Server();
+        }
+        return this.instance;
+    }
     StartServer() {
         const PORT = parseInt(process.env["PORT"]) || 3000;
-        app_1.app.app.listen(PORT, () => {
+        app_1.app.listen(PORT, () => {
             console.log(`SERVER running on http://localhost:${PORT} 🚀🌑`);
         });
     }
 }
-const server = new Server();
+const server = Server.getInstance();

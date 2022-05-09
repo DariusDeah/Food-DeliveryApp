@@ -5,10 +5,17 @@ import { ErrorHandlers } from './handlers/Error.handler';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
  class App{
    app: express.Application = express();
+  private static instance: App;
    constructor() {
     this.useMiddleware()
     this.useRoutes()
-  }
+   }
+   public static getInstance(): App{
+     if (this.instance == null) {
+       return new App()
+     }
+     return this.instance
+   }
    private useMiddleware() {
     const app = this.app;
      app.use(helmet())
@@ -22,4 +29,4 @@ import ExpressMongoSanitize from 'express-mongo-sanitize';
     ErrorHandlers.routerError(this.app);
   }
 }
-export const app = new App()
+export const app = App.getInstance().app

@@ -15,6 +15,12 @@ class App {
         this.useMiddleware();
         this.useRoutes();
     }
+    static getInstance() {
+        if (this.instance == null) {
+            return new App();
+        }
+        return this.instance;
+    }
     useMiddleware() {
         const app = this.app;
         app.use((0, helmet_1.default)());
@@ -28,4 +34,4 @@ class App {
         Error_handler_1.ErrorHandlers.routerError(this.app);
     }
 }
-exports.app = new App();
+exports.app = App.getInstance().app;

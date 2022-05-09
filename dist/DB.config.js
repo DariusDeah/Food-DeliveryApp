@@ -26,9 +26,9 @@ const dotenv = __importStar(require("dotenv"));
 const mysql2_1 = __importDefault(require("mysql2"));
 dotenv.config({ path: "./.env" });
 const db = mysql2_1.default.createPool({
-    user: process.env["user "],
-    host: process.env["host"],
-    password: process.env["password"],
-    database: process.env["database"],
+    user: process.env.user,
+    host: process.env.host,
+    password: process.env.password,
+    database: process.env.database,
 });
 exports.default = db.promise();

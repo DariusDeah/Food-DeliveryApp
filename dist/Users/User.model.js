@@ -17,7 +17,16 @@ const DB_config_1 = __importDefault(require("../DB.config"));
 class UserTable {
     create(userData) {
         return __awaiter(this, void 0, void 0, function* () {
-            const sqlQuery = `INSERT INTO users (fullName,email,password,phone,address,googleId) 
+            const sqlQuery = `
+    INSERT INTO users 
+   (
+     fullName,
+    email,
+    password,
+    phone,
+    address,
+    googleId
+    ) 
     VALUES()`;
             const user = yield DB_config_1.default.query(sqlQuery, userData);
             userData;

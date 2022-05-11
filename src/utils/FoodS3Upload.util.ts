@@ -5,7 +5,7 @@ import { FoodDTO } from "../Foods/food.interface";
 import { baseItem } from "../interfaces/baseItem.interface";
 //implement strategy pattern for photo uploads
 const Food_S3_Upload = async (req: Request, food: FoodDTO): Promise<void> => {
-  await uploadFile(req.file, food, process.env["S3_Name"] as string);
+  await uploadFile(req.file, food, process.env.S3_Name);
   await deleteLocalMulterImages(req.file.path);
 };
 const uploadStrategies = {

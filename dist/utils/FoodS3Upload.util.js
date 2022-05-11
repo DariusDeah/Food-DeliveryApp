@@ -14,7 +14,7 @@ const unlinkLocal_1 = require("../helpers/unlinkLocal");
 const multer_config_1 = require("../middlewares/multer.config");
 //implement strategy pattern for photo uploads
 const Food_S3_Upload = (req, food) => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, multer_config_1.uploadFile)(req.file, food, process.env["S3_Name"]);
+    yield (0, multer_config_1.uploadFile)(req.file, food, process.env.S3_Name);
     yield (0, unlinkLocal_1.deleteLocalMulterImages)(req.file.path);
 });
 const uploadStrategies = {

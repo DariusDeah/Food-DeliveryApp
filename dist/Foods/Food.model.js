@@ -17,22 +17,23 @@ const DB_config_1 = __importDefault(require("../DB.config"));
 class FoodTable {
     create(food) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(food.image);
             let sqlQuery = `INSERT INTO foods (
       name,
       price,
       size,
       calories
-      ${food.image ? ',image' : ''}
+      ${food.image ? ",image" : ""}
     )
-    VALUES(
-       ?,
-       ?,
-      ?,
-      ?
-      ${food.image ? ',?' : ''}
+    VALUES(?,?,?,?
+      ${food.image ? ",?" : ""}
     )`;
-            const [createdFood, _] = yield DB_config_1.default.query(sqlQuery, [food.name, food.price, food.size, food.calories, food.image ? food.image : '']);
+            const [createdFood, _] = yield DB_config_1.default.query(sqlQuery, [
+                food.name,
+                food.price,
+                food.size,
+                food.calories,
+                food.image ? food.image : "",
+            ]);
             console.log(createdFood);
             return createdFood;
         });
@@ -56,8 +57,9 @@ class FoodTable {
             const queryValues = Object.values(query);
             const sql = `SELECT id,name,price,size,image FROM foods
                     WHERE ${queryKeys[0]} = '${queryValues[0]}'
-                  ${queryKeys.length > 1 ?
-                `AND ${queryKeys[1]} = '${queryValues[1]}'` : ''}`;
+                  ${queryKeys.length > 1
+                ? `AND ${queryKeys[1]} = '${queryValues[1]}'`
+                : ""}`;
             const food = yield DB_config_1.default.query(sql);
             console.log(sql);
             return food[0];

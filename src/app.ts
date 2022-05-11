@@ -25,8 +25,8 @@ import ExpressMongoSanitize from 'express-mongo-sanitize';
    private useRoutes() {
      const app = this.app;
     app.use('/', foodController.controllerRouter)
-    ErrorHandlers.error(this.app)
-    ErrorHandlers.routerError(this.app);
+    ErrorHandlers.error(app)
+    ErrorHandlers.routerError(app);
   }
 }
 export const app = App.getInstance().app

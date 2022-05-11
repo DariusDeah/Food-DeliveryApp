@@ -17,8 +17,8 @@ class FoodService {
     createFood(foodData) {
         return __awaiter(this, void 0, void 0, function* () {
             const food = (0, food_validator_1.foodValidator)(foodData);
-            // TODO REFACTOR, this code is not clean 
-            if (typeof food === 'string')
+            // TODO REFACTOR, this code is not clean
+            if (typeof food === "string")
                 throw new Errors_util_1.BadRequestException(food);
             const createdFood = yield food_model_1.FoodDB.create(food);
             return createdFood;

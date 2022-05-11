@@ -19,19 +19,19 @@ const node_fs_1 = __importDefault(require("node:fs"));
 const s3_congifg_1 = require("../aws/s3.congifg");
 const multerFilter = (req, file, next) => __awaiter(void 0, void 0, void 0, function* () {
     console.log({ file });
-    if (!file.mimetype.startsWith('image'))
-        next(new Errors_util_1.BadRequestException('invalid file type: ' + file.mimetype));
+    if (!file.mimetype.startsWith("image"))
+        next(new Errors_util_1.BadRequestException("invalid file type: " + file.mimetype));
     next(null, true);
 });
-exports.upload = (0, multer_1.default)({ dest: '/uploads', fileFilter: multerFilter });
+exports.upload = (0, multer_1.default)({ dest: "/uploads", fileFilter: multerFilter });
 const uploadFile = (file, item, S3Location) => {
     const fileStream = node_fs_1.default.createReadStream(file.path);
-    const extension = file.mimetype.split('/')[1];
+    const extension = file.mimetype.split("/")[1];
     const Key = `${item.name}-${Date.now()}.${extension}`;
     const uploadParams = {
         Bucket: S3Location,
         Body: fileStream,
-        Key
+        Key,
     };
     return s3_congifg_1.UberEats_Clone_Folder.upload(uploadParams).promise();
 };

@@ -12,7 +12,7 @@ class FoodController extends BaseController {
     this.router
       .route(this.baseRoute)
       .get(this.getFoods)
-      .post(upload.single("image"), setImage,this.createFood);
+      .post(upload.single("image"), setImage, this.createFood);
 
     this.router.route(this.baseRoute + "/:id").get(this.getById);
 
@@ -47,7 +47,7 @@ class FoodController extends BaseController {
       const food: FoodDTO = req.body;
       await foodService.createFood(food);
       if (req.body.image) {
-        UploadToS3("food", req, food)
+        UploadToS3("food", req, food);
       }
       res.status(201).json({
         status: "success",
